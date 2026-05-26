@@ -16,7 +16,13 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body {
+html {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+}
+
+body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -24,12 +30,10 @@ html, body {
   font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#root { width: 100%; height: 100%; }
+#root { width: 100%; height: 100%; background: transparent; }
 
 /* ════════════════════════════════════
    PAGE — exact 100dvh, no scroll
-   Design base: 1170×2532 → scale ÷3
-   at 390px CSS width
 ════════════════════════════════════ */
 .rokko-page {
   display: flex;
@@ -48,7 +52,6 @@ html, body {
 
 /* ────────────────────────────────────
    TOP BLACK BAR
-   Spec: H=158px at 1170  →  158/2532 = 6.24dvh
 ──────────────────────────────────── */
 .top-black-bar {
   flex: 0 0 6.24dvh;
@@ -83,8 +86,6 @@ html, body {
 
 /* ────────────────────────────────────
    HEADER VIDEO
-   Spec: H=465px at 1170  →  465/2532 = 18.37dvh
-   Reduced slightly to make room for full bigsocialbar rabbit
 ──────────────────────────────────── */
 .video-header-container {
   flex: 0 0 17.2dvh;
@@ -98,11 +99,22 @@ html, body {
   height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
+}
+.video-header-container video::-webkit-media-controls { display: none !important; }
+.video-header-container video::-webkit-media-controls-start-playback-button { display: none !important; }
+.video-header-container video::-webkit-media-controls-panel { display: none !important; }
+.video-header-container video::--webkit-media-controls-play-button { display: none !important; }
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 .unmute-btn {
   position: absolute;
   bottom: 6px;
   right: 10px;
+  z-index: 2;
   background: rgba(0,0,0,0.6);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.35);
@@ -117,15 +129,12 @@ html, body {
 
 /* ────────────────────────────────────
    ARTISTS SECTION
-   Spec: Grid H=495px at 1170 → 19.55dvh
-   Plus "artists" label → total ~21dvh
-   Reduced slightly to make room for full bigsocialbar rabbit
 ──────────────────────────────────── */
 .artists-section {
   flex: 0 0 20.1dvh;
   display: flex;
   flex-direction: column;
-  padding: 0 7.35%;           /* X=86/1170=7.35% */
+  padding: 0 7.35%;
   gap: 0;
 }
 .artists-label {
@@ -138,7 +147,6 @@ html, body {
   padding: 0.4dvh 0 0.3dvh;
   letter-spacing: 0.02em;
 }
-/* 4-col × 2-row grid of perfect-square tiles */
 .artist-grid {
   flex: 1 1 0;
   min-height: 0;
@@ -158,7 +166,6 @@ html, body {
 }
 .artist-tile.active  { border-color: #ff3a1a; box-shadow: 0 0 8px rgba(255,58,26,0.5); }
 .artist-tile:hover   { box-shadow: 0 0 8px rgba(184,28,9,0.5); }
-/* Artist images are 2000×2000 squares — cover fills perfectly */
 .artist-tile img {
   width: 100%;
   height: 100%;
@@ -180,8 +187,6 @@ html, body {
 
 /* ────────────────────────────────────
    WIR SIND ROKKO BANNER
-   Image: 1170×500 → at 390px wide → NATURAL height = 166.7px
-   NO object-fit, NO fixed height → zero distortion
 ──────────────────────────────────── */
 .wirsindrokko-wrap {
   flex: 0 0 auto;
@@ -193,9 +198,7 @@ html, body {
 }
 
 /* ────────────────────────────────────
-   DARK SECTION  (fills all remaining)
-   Contains: merch+wallpaper row + social bar
-   Bottom bar (black) is inside here
+   DARK SECTION
 ──────────────────────────────────── */
 .dark-section {
   flex: 1 1 0;
@@ -206,10 +209,6 @@ html, body {
   flex-direction: column;
 }
 
-/* ── Merch + Wallpaper row ──
-   Spec: Y=1600–1911 = 311px design → 311/2532 = 12.28dvh
-   Images keep natural aspect ratios — NO stretch
-*/
 .merch-wallpaper-row {
   flex: 0 0 12.28dvh;
   display: flex;
@@ -218,18 +217,11 @@ html, body {
   gap: 3%;
   padding: 0 5%;
 }
-/* merch: 480/1170 = 41% of page width */
 .merch-link         { flex: 0 0 41%; display: block; }
 .merch-link img     { width: 100%; height: auto; display: block; }
-/* wallpaper: 530/1170 = 45.3% of page width */
 .wallpaper-link-wrap     { flex: 0 0 45.3%; }
 .wallpaper-link-wrap img { width: 100%; height: auto; display: block; cursor: pointer; }
 
-/* ── Social bar ──
-   Image: 1170×625 → natural height at 390px = 208.3px
-   Fills ALL remaining dark section space.
-   bigsocialbar has icons at top, rabbit below — both visible.
-*/
 .social-bar-container {
   flex: 1 1 0;
   min-height: 0;
@@ -238,7 +230,7 @@ html, body {
 }
 .social-bar-container > img {
   width: 100%;
-  height: auto;      /* natural ratio = 208px at 390px wide — NO distortion */
+  height: auto;
   display: block;
 }
 .social-bar-links {
@@ -246,20 +238,17 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  /* icon strip is top 33% of bigsocialbar.png (≈205/625 height) */
   height: 33%;
   display: flex;
 }
 .social-bar-links a,
 .social-bar-links div { flex: 1; display: block; cursor: pointer; }
 
-/* ── Bottom black bar — REMOVED (dark section background serves same purpose) ── */
 .bottom-black-bar { flex: 0 0 0; }
 
 
 /* ════════════════════════════════════
    ARTIST DROPDOWN
-   Fixed overlay, slides up from bottom of grid
 ════════════════════════════════════ */
 .dropdown-overlay {
   position: fixed;
@@ -272,7 +261,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   width: min(480px, 100vw);
-  bottom: 6.24dvh;           /* sits above bottom black bar */
+  bottom: 6.24dvh;
   z-index: 21;
   padding: 0 7.35%;
   animation: dd-in 0.3s ease-out;
@@ -285,7 +274,6 @@ html, body {
   to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
 }
 
-/* Dropdown inner box */
 .dropdown-inner {
   background: #140A0A;
   border: clamp(3px, 0.6dvh, 6px) solid #580C03;
@@ -297,7 +285,6 @@ html, body {
   position: relative;
 }
 
-/* Left: small artist photo + name */
 .dd-left {
   flex: 1 1 0;
   min-width: 0;
@@ -330,7 +317,6 @@ html, body {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* Right: album cover + title + social icons */
 .dd-right {
   flex: 0 0 clamp(70px, 13dvh, 140px);
   display: flex;
@@ -338,7 +324,6 @@ html, body {
   align-items: center;
   gap: clamp(3px, 0.5dvh, 6px);
 }
-/* Dark background frame behind right panel */
 .dd-bg-frame {
   position: absolute;
   right: 0; top: 0; bottom: 0;
@@ -354,7 +339,6 @@ html, body {
   font-family: Tahoma, sans-serif; width: 100%;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-/* Album cover — square, no stretch */
 .dd-cover-img {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -365,7 +349,6 @@ html, body {
 }
 .dd-cover-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* Social icons: slice 1/3 of socialmedia-icons.png (938×245, 3 icons side-by-side) */
 .dd-social-row {
   display: flex;
   gap: clamp(3px, 0.5dvh, 5px);
@@ -373,7 +356,6 @@ html, body {
   width: 100%;
 }
 .dd-social-icon {
-  /* Each icon = 1/3 of 938px wide image */
   width: clamp(20px, 3.8dvh, 36px);
   height: clamp(20px, 3.8dvh, 36px);
   border-radius: 4px;
@@ -386,7 +368,7 @@ html, body {
 .dd-icon-slice {
   position: absolute;
   top: 0; height: 100%;
-  width: 300%;                /* 3× wide to show full strip */
+  width: 300%;
   display: block;
   object-fit: cover;
 }
@@ -394,7 +376,6 @@ html, body {
 .dd-icon-spotify { left: -100%; }
 .dd-icon-amazon  { left: -200%; }
 
-/* Bio text */
 .dd-bio {
   background: #140A0A;
   border: clamp(3px, 0.6dvh, 6px) solid #580C03;
@@ -408,7 +389,6 @@ html, body {
   overflow-y: auto;
 }
 
-/* Close bar */
 .dd-close-bar {
   display: flex;
   align-items: center;
