@@ -1,0 +1,230 @@
+import { useState, useRef, useCallback, useEffect } from "react";
+import { ARTISTS } from "../data/artists";
+import type { Artist } from "../data/artists";
+import WallpaperPopup from "../components/WallpaperPopup";
+
+export default function Home() {
+  const [openArtist, setOpenArtist] = useState<string | null>(null);
+  const [showWallpaper, setShowWallpaper] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [dropdownTop, setDropdownTop] = useState<number>(0);
+
+  const selectedArtist: Artist | undefined = openArtist
+    ? ARTISTS.find((a) => a.id === openArtist)
+    : undefined;
+
+  const handleArtistClick = useCallback(
+    (id: string) => {
+      if (openArtist === id) {
+        setOpenArtist(null);
+        return;
+      }
+      if (gridRef.current) {
+        const rect = gridRef.current.getBoundingClientRect();
+        setDropdownTop(rect.bottom);
+      }
+      setOpenArtist(id);
+    },
+    [openArtist],
+  );
+
+  const handleUnmute = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isMuted) {
+      video.muted = false;
+      video.currentTime = 0;
+      video.play();
+      setIsMuted(false);
+    } else {
+      video.muted = true;
+      setIsMuted(true);
+    }
+  }, [isMuted]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().catch(() => {});
+  }, []);
+
+  return (
+    <div className="rokko-page">
+
+      {/* TOP BLACK BAR — 6.5% */}
+      <div className="top-black-bar">
+        <div className="top-bar-logo">
+          <span>ROKKO!</span>
+          <br />
+          <span style={{ color: "#fff", fontSize: "0.6em", fontWeight: 400, letterSpacing: "0.15em" }}>
+            RECORDS
+          </span>
+        </div>
+        <button className="contact-btn" data-testid="button-contact">
+          CONTACT
+        </button>
+      </div>
+
+      {/* HEADER VIDEO — 18% */}
+      <div className="video-header-container" data-testid="header-video">
+        <video
+          ref={videoRef}
+          src="/assets/videos/header.mp4"
+          playsInline
+          muted
+          onEnded={(e) => { (e.target as HTMLVideoElement).pause(); }}
+        />
+        <button
+          className="unmute-btn"
+          onClick={handleUnmute}
+          data-testid="button-unmute"
+          aria-label={isMuted ? "Ton einschalten" : "Ton ausschalten"}
+        >
+          {isMuted ? "🔇 Ton an" : "🔊 Ton aus"}
+        </button>
+      </div>
+
+      {/* ARTISTS SECTION — 20% */}
+      <div className="artists-section">
+        <div className="artists-label" data-testid="text-artists-label">artists</div>
+        <div className="artist-grid" ref={gridRef} data-testid="artist-grid">
+          {ARTISTS.map((artist) => (
+            <div
+              key={artist.id}
+              className={`artist-tile${openArtist === artist.id ? " active" : ""}`}
+              onClick={() => handleArtistClick(artist.id)}
+              data-testid={`artist-tile-${artist.id}`}
+              role="button"
+              tabIndex={0}
+              aria-label={`Artist: ${artist.name}`}
+              onKeyDown={(e) => e.key === "Enter" && handleArtistClick(artist.id)}
+            >
+              <img src={artist.image} alt={artist.name} />
+              <div className="artist-tile-label">
+                {artist.nameH1
+                  ? <><span className="tile-sub">{artist.nameH3.toUpperCase()}</span><span className="tile-main">{artist.nameH1.toUpperCase()}</span></>
+                  : <span className="tile-main">{artist.nameH3.toUpperCase()}</span>
+                }
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* WIR SIND ROKKO BANNER — 20% */}
+      <div className="wirsindrokko-wrap">
+        <img
+          src="/assets/banners/wirsindrokko.png"
+          alt="Wir sind Rokko!"
+          data-testid="img-wirsindrokko"
+        />
+      </div>
+
+      {/* DARK SECTION: Merch + Social — remaining */}
+      <div className="dark-section">
+        <div className="merch-wallpaper-row">
+          <a
+            href="https://rokko-records-klumpatsch.myspreadshop.de/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="merch-link"
+            data-testid="link-merch"
+          >
+            <img src="/assets/banners/merchbutton.png" alt="Rokko! Merchandise – Shop Now" />
+          </a>
+          <div className="wallpaper-link-wrap">
+            <img
+              src="/assets/banners/wallpaperlinks.png"
+              alt="Wallpaper"
+              onClick={() => setShowWallpaper(true)}
+              data-testid="button-wallpaper"
+            />
+          </div>
+        </div>
+
+        <div className="social-bar-container" data-testid="social-bar">
+          <img src="/assets/banners/bigsocialbar.png" alt="Rokko! Social Media" />
+          <div className="social-bar-links">
+            <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
+            <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
+            <div style={{ flex: 1 }} />
+            <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
+            <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
+          </div>
+        </div>
+      </div>
+
+      {/* BOTTOM BAR */}
+      <div className="bottom-black-bar" />
+
+      {/* DROPDOWN OVERLAY — fixed, starts right below artist grid */}
+      {selectedArtist && (
+        <>
+          <div
+            className="dropdown-overlay"
+            style={{ top: `${dropdownTop}px` }}
+            onClick={() => setOpenArtist(null)}
+            data-testid="dropdown-overlay"
+          />
+          <div
+            className="dropdown-fixed"
+            style={{ top: `${dropdownTop}px` }}
+            data-testid={`dropdown-${selectedArtist.id}`}
+          >
+            <div className="dropdown-inner">
+              {/* Left: artist photo + name */}
+              <div className="dd-left">
+                <div className="dd-artist-img">
+                  <img src={selectedArtist.image} alt={selectedArtist.name} />
+                </div>
+                <div className="dd-headline">
+                  <div className="dd-h3">{selectedArtist.nameH3}</div>
+                  {selectedArtist.nameH1 && <div className="dd-h1">{selectedArtist.nameH1}</div>}
+                </div>
+              </div>
+
+              {/* Right: cover + title + social */}
+              <div className="dd-right">
+                <div className="dd-bg-frame" />
+                <div className="dd-cover-title">{selectedArtist.albumTitle}</div>
+                <div className="dd-cover-img">
+                  <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} />
+                </div>
+                <div className="dd-social-row">
+                  {selectedArtist.links.appleMusic
+                    ? <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" data-testid={`link-apple-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Apple Music" className="dd-icon-slice dd-icon-apple" /></a>
+                    : <span className="dd-social-icon dd-icon-inactive" />
+                  }
+                  {selectedArtist.links.spotify
+                    ? <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" data-testid={`link-spotify-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Spotify" className="dd-icon-slice dd-icon-spotify" /></a>
+                    : <span className="dd-social-icon dd-icon-inactive" />
+                  }
+                  {selectedArtist.links.amazon
+                    ? <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" data-testid={`link-amazon-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Amazon Music" className="dd-icon-slice dd-icon-amazon" /></a>
+                    : <span className="dd-social-icon dd-icon-inactive" />
+                  }
+                </div>
+              </div>
+            </div>
+
+            {/* Bio text */}
+            <div className="dd-bio">{selectedArtist.bio}</div>
+
+            {/* Close bar */}
+            <button className="dd-close-bar" onClick={() => setOpenArtist(null)} data-testid="dropdown-close">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <path d="M4 14L10 6L16 14" stroke="#B81C09" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>Dropdown Menü zuklappen</span>
+            </button>
+          </div>
+        </>
+      )}
+
+      {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
+    </div>
+  );
+}
