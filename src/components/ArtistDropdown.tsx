@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Artist } from "../data/artists";
+import { asset } from "../utils/asset";
 
 interface ArtistDropdownProps {
   artist: Artist;
@@ -88,7 +89,7 @@ export default function ArtistDropdown({ artist, onClose, isVisible }: ArtistDro
                       title="Apple Music"
                     >
                       <img
-                        src="/assets/banners/socialmedia-icons.png"
+                        src={asset("/assets/banners/socialmedia-icons.png")}
                         alt="Apple Music"
                         style={{
                           width: "34px",
@@ -122,7 +123,7 @@ export default function ArtistDropdown({ artist, onClose, isVisible }: ArtistDro
                       title="Spotify"
                     >
                       <img
-                        src="/assets/banners/socialmedia-icons.png"
+                        src={asset("/assets/banners/socialmedia-icons.png")}
                         alt="Spotify"
                         style={{
                           width: "34px",
@@ -156,7 +157,7 @@ export default function ArtistDropdown({ artist, onClose, isVisible }: ArtistDro
                       title="Amazon Music"
                     >
                       <img
-                        src="/assets/banners/socialmedia-icons.png"
+                        src={asset("/assets/banners/socialmedia-icons.png")}
                         alt="Amazon Music"
                         style={{
                           width: "34px",

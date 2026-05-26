@@ -1,9 +1,10 @@
 import { useState, useCallback } from "react";
+import { asset } from "../utils/asset";
 
 const WALLPAPERS = [
-  "/assets/wallpaper/wallpaper_01.png",
-  "/assets/wallpaper/wallpaper_02.png",
-  "/assets/wallpaper/wallpaper_03.png",
+  asset("/assets/wallpaper/wallpaper_01.png"),
+  asset("/assets/wallpaper/wallpaper_02.png"),
+  asset("/assets/wallpaper/wallpaper_03.png"),
 ];
 
 interface WallpaperPopupProps {
