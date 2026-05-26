@@ -1,0 +1,467 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --font-sans: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --background: 0 0% 5%;
+  --foreground: 0 0% 95%;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #C51F09 0%, #570505 40%, #3a0303 100%);
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root { width: 100%; height: 100%; }
+
+/* ════════════════════════════════════
+   PAGE — exact 100dvh, no scroll
+   Design base: 1170×2532 → scale ÷3
+   at 390px CSS width
+════════════════════════════════════ */
+.rokko-page {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (orientation: landscape), (min-width: 600px) {
+  .rokko-page { max-width: min(520px, 67dvh); }
+}
+
+/* ────────────────────────────────────
+   TOP BLACK BAR
+   Spec: H=158px at 1170  →  158/2532 = 6.24dvh
+──────────────────────────────────── */
+.top-black-bar {
+  flex: 0 0 6.24dvh;
+  background: #0C1011;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  z-index: 2;
+}
+.top-bar-logo {
+  font-family: Arial Black, Arial, sans-serif;
+  font-weight: 900;
+  color: #fff;
+  font-size: clamp(11px, 2.5dvh, 22px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.top-bar-logo span:first-child { color: #C51F09; }
+.contact-btn {
+  border: 1px solid #fff;
+  color: #fff;
+  font-family: Tahoma, sans-serif;
+  font-size: clamp(8px, 1.4dvh, 13px);
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+.contact-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* ────────────────────────────────────
+   HEADER VIDEO
+   Spec: H=465px at 1170  →  465/2532 = 18.37dvh
+   Reduced slightly to make room for full bigsocialbar rabbit
+──────────────────────────────────── */
+.video-header-container {
+  flex: 0 0 17.2dvh;
+  position: relative;
+  border: clamp(3px, 0.8dvh, 10px) solid #B81C09;
+  background: #000;
+  overflow: hidden;
+}
+.video-header-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.unmute-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
+  padding: 3px 7px;
+  font-size: clamp(9px, 1.3dvh, 12px);
+  font-family: Tahoma, sans-serif;
+  cursor: pointer;
+  z-index: 3;
+}
+.unmute-btn:hover { background: rgba(184,28,9,0.7); }
+
+/* ────────────────────────────────────
+   ARTISTS SECTION
+   Spec: Grid H=495px at 1170 → 19.55dvh
+   Plus "artists" label → total ~21dvh
+   Reduced slightly to make room for full bigsocialbar rabbit
+──────────────────────────────────── */
+.artists-section {
+  flex: 0 0 20.1dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 7.35%;           /* X=86/1170=7.35% */
+  gap: 0;
+}
+.artists-label {
+  flex: 0 0 auto;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  font-size: clamp(12px, 2dvh, 22px);
+  font-style: italic;
+  font-weight: bold;
+  color: #C51F09;
+  padding: 0.4dvh 0 0.3dvh;
+  letter-spacing: 0.02em;
+}
+/* 4-col × 2-row grid of perfect-square tiles */
+.artist-grid {
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: clamp(3px, 0.55dvh, 7px);
+}
+.artist-tile {
+  cursor: pointer;
+  border: 1.5px solid #B81C09;
+  border-radius: clamp(8px, 1.8dvh, 18px);
+  overflow: hidden;
+  position: relative;
+  background: #0a0a0a;
+  transition: box-shadow 0.15s;
+}
+.artist-tile.active  { border-color: #ff3a1a; box-shadow: 0 0 8px rgba(255,58,26,0.5); }
+.artist-tile:hover   { box-shadow: 0 0 8px rgba(184,28,9,0.5); }
+/* Artist images are 2000×2000 squares — cover fills perfectly */
+.artist-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.artist-tile-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2px 3px 3px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.88));
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.tile-sub  { font-size: clamp(5px, 0.75dvh, 8px);  color: rgba(255,255,255,0.6); font-weight: bold; letter-spacing: 0.03em; }
+.tile-main { font-size: clamp(6px, 0.95dvh, 10px); color: #fff;                  font-weight: bold; letter-spacing: 0.03em; }
+
+/* ────────────────────────────────────
+   WIR SIND ROKKO BANNER
+   Image: 1170×500 → at 390px wide → NATURAL height = 166.7px
+   NO object-fit, NO fixed height → zero distortion
+──────────────────────────────────── */
+.wirsindrokko-wrap {
+  flex: 0 0 auto;
+}
+.wirsindrokko-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ────────────────────────────────────
+   DARK SECTION  (fills all remaining)
+   Contains: merch+wallpaper row + social bar
+   Bottom bar (black) is inside here
+──────────────────────────────────── */
+.dark-section {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #140A0A;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Merch + Wallpaper row ──
+   Spec: Y=1600–1911 = 311px design → 311/2532 = 12.28dvh
+   Images keep natural aspect ratios — NO stretch
+*/
+.merch-wallpaper-row {
+  flex: 0 0 12.28dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3%;
+  padding: 0 5%;
+}
+/* merch: 480/1170 = 41% of page width */
+.merch-link         { flex: 0 0 41%; display: block; }
+.merch-link img     { width: 100%; height: auto; display: block; }
+/* wallpaper: 530/1170 = 45.3% of page width */
+.wallpaper-link-wrap     { flex: 0 0 45.3%; }
+.wallpaper-link-wrap img { width: 100%; height: auto; display: block; cursor: pointer; }
+
+/* ── Social bar ──
+   Image: 1170×625 → natural height at 390px = 208.3px
+   Fills ALL remaining dark section space.
+   bigsocialbar has icons at top, rabbit below — both visible.
+*/
+.social-bar-container {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+.social-bar-container > img {
+  width: 100%;
+  height: auto;      /* natural ratio = 208px at 390px wide — NO distortion */
+  display: block;
+}
+.social-bar-links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* icon strip is top 33% of bigsocialbar.png (≈205/625 height) */
+  height: 33%;
+  display: flex;
+}
+.social-bar-links a,
+.social-bar-links div { flex: 1; display: block; cursor: pointer; }
+
+/* ── Bottom black bar — REMOVED (dark section background serves same purpose) ── */
+.bottom-black-bar { flex: 0 0 0; }
+
+
+/* ════════════════════════════════════
+   ARTIST DROPDOWN
+   Fixed overlay, slides up from bottom of grid
+════════════════════════════════════ */
+.dropdown-overlay {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 20;
+}
+.dropdown-fixed {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(480px, 100vw);
+  bottom: 6.24dvh;           /* sits above bottom black bar */
+  z-index: 21;
+  padding: 0 7.35%;
+  animation: dd-in 0.3s ease-out;
+}
+@media (orientation: landscape), (min-width: 600px) {
+  .dropdown-fixed { width: min(520px, 67dvh); }
+}
+@keyframes dd-in {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
+}
+
+/* Dropdown inner box */
+.dropdown-inner {
+  background: #140A0A;
+  border: clamp(3px, 0.6dvh, 6px) solid #580C03;
+  border-radius: clamp(12px, 2.5dvh, 26px);
+  padding: clamp(6px, 1.2dvh, 14px);
+  display: flex;
+  gap: clamp(6px, 1dvh, 12px);
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Left: small artist photo + name */
+.dd-left {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  gap: clamp(5px, 0.8dvh, 10px);
+  align-items: flex-start;
+}
+.dd-artist-img {
+  flex: 0 0 clamp(44px, 8dvh, 90px);
+  height: clamp(44px, 8dvh, 90px);
+  border: 1px solid #580C03;
+  border-radius: clamp(6px, 1.2dvh, 15px);
+  overflow: hidden;
+  background: #0a0a0a;
+}
+.dd-artist-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+.dd-headline { flex: 1; min-width: 0; padding-top: 2px; }
+.dd-h3 {
+  font-size: clamp(18px, 4dvh, 46px);
+  font-weight: bold; color: #fff; line-height: 1.0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dd-h1 {
+  font-size: clamp(10px, 2dvh, 26px);
+  font-weight: bold; color: #ccc; line-height: 1.2; margin-top: 1px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Right: album cover + title + social icons */
+.dd-right {
+  flex: 0 0 clamp(70px, 13dvh, 140px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3px, 0.5dvh, 6px);
+}
+/* Dark background frame behind right panel */
+.dd-bg-frame {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: clamp(80px, 15dvh, 155px);
+  border: 2px solid #580C03;
+  border-radius: 0 clamp(10px, 2dvh, 20px) clamp(10px, 2dvh, 20px) 0;
+  background: #000;
+  z-index: -1;
+}
+.dd-cover-title {
+  font-size: clamp(8px, 1.4dvh, 15px);
+  color: #fff; text-align: center;
+  font-family: Tahoma, sans-serif; width: 100%;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Album cover — square, no stretch */
+.dd-cover-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+.dd-cover-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Social icons: slice 1/3 of socialmedia-icons.png (938×245, 3 icons side-by-side) */
+.dd-social-row {
+  display: flex;
+  gap: clamp(3px, 0.5dvh, 5px);
+  justify-content: center;
+  width: 100%;
+}
+.dd-social-icon {
+  /* Each icon = 1/3 of 938px wide image */
+  width: clamp(20px, 3.8dvh, 36px);
+  height: clamp(20px, 3.8dvh, 36px);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  display: block;
+}
+.dd-icon-inactive { background: #444; opacity: 0.35; }
+.dd-icon-slice {
+  position: absolute;
+  top: 0; height: 100%;
+  width: 300%;                /* 3× wide to show full strip */
+  display: block;
+  object-fit: cover;
+}
+.dd-icon-apple   { left: 0%;    }
+.dd-icon-spotify { left: -100%; }
+.dd-icon-amazon  { left: -200%; }
+
+/* Bio text */
+.dd-bio {
+  background: #140A0A;
+  border: clamp(3px, 0.6dvh, 6px) solid #580C03;
+  border-top: none;
+  border-radius: 0 0 clamp(12px, 2.5dvh, 26px) clamp(12px, 2.5dvh, 26px);
+  padding: clamp(6px, 1.2dvh, 12px) clamp(8px, 1.5dvh, 14px) clamp(4px, 0.8dvh, 8px);
+  font-size: clamp(9px, 1.5dvh, 17px);
+  color: #ddd;
+  line-height: 1.45;
+  max-height: 13dvh;
+  overflow-y: auto;
+}
+
+/* Close bar */
+.dd-close-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: clamp(4px, 0.8dvh, 8px) 0 clamp(5px, 1dvh, 10px);
+  background: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: Tahoma, sans-serif;
+  font-size: clamp(11px, 1.8dvh, 20px);
+  font-weight: bold;
+  color: #B81C09;
+}
+
+
+/* ════════════════════════════════════
+   WALLPAPER POPUP
+════════════════════════════════════ */
+.wallpaper-popup-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+}
+.wallpaper-popup {
+  background: #140A0A;
+  border: 2px solid #580C03;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 92vw;
+  max-height: 88dvh;
+  overflow-y: auto;
+  position: relative;
+}
+.wallpaper-popup-close {
+  position: absolute; top: 8px; right: 12px;
+  color: #fff; background: transparent; border: none;
+  font-size: 22px; cursor: pointer; font-weight: bold; z-index: 10;
+}
+.wallpaper-popup-grid {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  justify-content: center; margin-top: 24px;
+}
+.wallpaper-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+.wallpaper-item img { max-width: 120px; max-height: 200px; object-fit: contain; border: 1px solid #580C03; border-radius: 6px; }
+.wallpaper-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 10px; }
+.wallpaper-nav-btn { background: #580C03; color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.wallpaper-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.wallpaper-download-btn { background: #B81C09; color: #fff; border: none; border-radius: 6px; padding: 8px 20px; font-family: Tahoma, sans-serif; font-size: 14px; cursor: pointer; margin-top: 8px; }
+.wallpaper-download-btn:hover { background: #D82010; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #580C03; border-radius: 2px; }
