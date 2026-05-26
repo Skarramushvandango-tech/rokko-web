@@ -104,7 +104,7 @@ body {
 .video-header-container video::-webkit-media-controls { display: none !important; }
 .video-header-container video::-webkit-media-controls-start-playback-button { display: none !important; }
 .video-header-container video::-webkit-media-controls-panel { display: none !important; }
-.video-header-container video::--webkit-media-controls-play-button { display: none !important; }
+.video-header-container video::-webkit-media-controls-play-button { display: none !important; }
 .video-overlay {
   position: absolute;
   inset: 0;
