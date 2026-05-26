@@ -54,29 +54,19 @@ export default function Home() {
   return (
     <div className="rokko-page">
 
-      {/* TOP BLACK BAR — 6.5% */}
-      <div className="top-black-bar">
-        <div className="top-bar-logo">
-          <span>ROKKO!</span>
-          <br />
-          <span style={{ color: "#fff", fontSize: "0.6em", fontWeight: 400, letterSpacing: "0.15em" }}>
-            RECORDS
-          </span>
-        </div>
-        <button className="contact-btn" data-testid="button-contact">
-          CONTACT
-        </button>
-      </div>
-
-      {/* HEADER VIDEO — 18% */}
+      {/* HEADER VIDEO */}
       <div className="video-header-container" data-testid="header-video">
         <video
           ref={videoRef}
           src="/assets/videos/header.mp4"
+          autoPlay
           playsInline
           muted
+          disablePictureInPicture
+          disableRemotePlayback
           onEnded={(e) => { (e.target as HTMLVideoElement).pause(); }}
         />
+        <div className="video-overlay" />
         <button
           className="unmute-btn"
           onClick={handleUnmute}
@@ -87,7 +77,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* ARTISTS SECTION — 20% */}
+      {/* ARTISTS SECTION */}
       <div className="artists-section">
         <div className="artists-label" data-testid="text-artists-label">artists</div>
         <div className="artist-grid" ref={gridRef} data-testid="artist-grid">
@@ -114,7 +104,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* WIR SIND ROKKO BANNER — 20% */}
+      {/* WIR SIND ROKKO BANNER */}
       <div className="wirsindrokko-wrap">
         <img
           src="/assets/banners/wirsindrokko.png"
@@ -123,7 +113,7 @@ export default function Home() {
         />
       </div>
 
-      {/* DARK SECTION: Merch + Social — remaining */}
+      {/* DARK SECTION: Merch + Social */}
       <div className="dark-section">
         <div className="merch-wallpaper-row">
           <a
@@ -160,7 +150,7 @@ export default function Home() {
       {/* BOTTOM BAR */}
       <div className="bottom-black-bar" />
 
-      {/* DROPDOWN OVERLAY — fixed, starts right below artist grid */}
+      {/* DROPDOWN OVERLAY */}
       {selectedArtist && (
         <>
           <div
@@ -175,7 +165,6 @@ export default function Home() {
             data-testid={`dropdown-${selectedArtist.id}`}
           >
             <div className="dropdown-inner">
-              {/* Left: artist photo + name */}
               <div className="dd-left">
                 <div className="dd-artist-img">
                   <img src={selectedArtist.image} alt={selectedArtist.name} />
@@ -186,7 +175,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right: cover + title + social */}
               <div className="dd-right">
                 <div className="dd-bg-frame" />
                 <div className="dd-cover-title">{selectedArtist.albumTitle}</div>
@@ -210,10 +198,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Bio text */}
             <div className="dd-bio">{selectedArtist.bio}</div>
 
-            {/* Close bar */}
             <button className="dd-close-bar" onClick={() => setOpenArtist(null)} data-testid="dropdown-close">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M4 14L10 6L16 14" stroke="#B81C09" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
