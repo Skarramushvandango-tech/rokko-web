@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { ARTISTS } from "../data/artists";
 import type { Artist } from "../data/artists";
 import WallpaperPopup from "../components/WallpaperPopup";
+import { asset } from "../utils/asset";
 
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
@@ -58,7 +59,7 @@ export default function Home() {
       <div className="video-header-container" data-testid="header-video">
         <video
           ref={videoRef}
-          src="/assets/videos/header.mp4"
+          src={asset("/assets/videos/header.mp4")}
           autoPlay
           playsInline
           muted
@@ -107,7 +108,7 @@ export default function Home() {
       {/* WIR SIND ROKKO BANNER */}
       <div className="wirsindrokko-wrap">
         <img
-          src="/assets/banners/wirsindrokko.png"
+          src={asset("/assets/banners/wirsindrokko.png")}
           alt="Wir sind Rokko!"
           data-testid="img-wirsindrokko"
         />
@@ -123,11 +124,11 @@ export default function Home() {
             className="merch-link"
             data-testid="link-merch"
           >
-            <img src="/assets/banners/merchbutton.png" alt="Rokko! Merchandise – Shop Now" />
+            <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise – Shop Now" />
           </a>
           <div className="wallpaper-link-wrap">
             <img
-              src="/assets/banners/wallpaperlinks.png"
+              src={asset("/assets/banners/wallpaperlinks.png")}
               alt="Wallpaper"
               onClick={() => setShowWallpaper(true)}
               data-testid="button-wallpaper"
@@ -136,7 +137,7 @@ export default function Home() {
         </div>
 
         <div className="social-bar-container" data-testid="social-bar">
-          <img src="/assets/banners/bigsocialbar.png" alt="Rokko! Social Media" />
+          <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" />
           <div className="social-bar-links">
             <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
             <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
@@ -183,15 +184,15 @@ export default function Home() {
                 </div>
                 <div className="dd-social-row">
                   {selectedArtist.links.appleMusic
-                    ? <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" data-testid={`link-apple-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Apple Music" className="dd-icon-slice dd-icon-apple" /></a>
+                    ? <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" data-testid={`link-apple-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Apple Music" className="dd-icon-slice dd-icon-apple" /></a>
                     : <span className="dd-social-icon dd-icon-inactive" />
                   }
                   {selectedArtist.links.spotify
-                    ? <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" data-testid={`link-spotify-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Spotify" className="dd-icon-slice dd-icon-spotify" /></a>
+                    ? <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" data-testid={`link-spotify-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Spotify" className="dd-icon-slice dd-icon-spotify" /></a>
                     : <span className="dd-social-icon dd-icon-inactive" />
                   }
                   {selectedArtist.links.amazon
-                    ? <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" data-testid={`link-amazon-${selectedArtist.id}`} className="dd-social-icon"><img src="/assets/banners/socialmedia-icons.png" alt="Amazon Music" className="dd-icon-slice dd-icon-amazon" /></a>
+                    ? <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" data-testid={`link-amazon-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Amazon Music" className="dd-icon-slice dd-icon-amazon" /></a>
                     : <span className="dd-social-icon dd-icon-inactive" />
                   }
                 </div>
