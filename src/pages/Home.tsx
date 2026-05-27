@@ -62,7 +62,14 @@ export default function Home() {
 
       {/* ARTISTS SECTION */}
       <div className="artists-section">
-        <div className="artists-label" data-testid="text-artists-label">artists</div>
+        <img
+          src={asset("/assets/banners/artists.png")}
+          alt="artists"
+          className="artists-label-img"
+          loading="eager"
+          decoding="async"
+          data-testid="text-artists-label"
+        />
         <div className="artist-grid" ref={gridRef} data-testid="artist-grid">
           {ARTISTS.map((artist) => (
             <div
@@ -87,6 +94,9 @@ export default function Home() {
         </div>
       </div>
 
+      {/* DESIGN STRIP — optische Fläche hinter dem Artist-Popup */}
+      <div className="design-strip" />
+
       {/* WIR SIND ROKKO BANNER */}
       <div className="wirsindrokko-wrap">
         <img
@@ -98,8 +108,20 @@ export default function Home() {
         />
       </div>
 
-      {/* DARK SECTION: Merch + Social */}
-      <div className="dark-section">
+      {/* BIGSOCIALBAR */}
+      <div className="social-bar-container" data-testid="social-bar">
+        <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
+        <div className="social-bar-links">
+          <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
+          <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
+          <div style={{ flex: 1 }} />
+          <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
+          <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
+        </div>
+      </div>
+
+      {/* MERCH + WALLPAPER STRIP */}
+      <div className="merch-wallpaper-strip">
         <div className="merch-wallpaper-row">
           <a
             href="https://rokko-records-klumpatsch.myspreadshop.de/"
@@ -121,17 +143,16 @@ export default function Home() {
             />
           </div>
         </div>
+      </div>
 
-        <div className="social-bar-container" data-testid="social-bar">
-          <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
-          <div className="social-bar-links">
-            <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
-            <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
-            <div style={{ flex: 1 }} />
-            <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
-            <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
-          </div>
-        </div>
+      {/* HEADSETBUNS */}
+      <div className="headsetbuns-wrap">
+        <img
+          src={asset("/assets/banners/headsetbuns.png")}
+          alt="Rokko! Records"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       {/* FOOTER */}
