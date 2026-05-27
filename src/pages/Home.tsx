@@ -7,7 +7,6 @@ import { asset } from "../utils/asset";
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
   const [showWallpaper, setShowWallpaper] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [dropdownTop, setDropdownTop] = useState<number>(0);
@@ -30,20 +29,6 @@ export default function Home() {
     },
     [openArtist],
   );
-
-  const handleUnmute = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (isMuted) {
-      video.muted = false;
-      video.currentTime = 0;
-      video.play();
-      setIsMuted(false);
-    } else {
-      video.muted = true;
-      setIsMuted(true);
-    }
-  }, [isMuted]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -68,14 +53,6 @@ export default function Home() {
           onEnded={(e) => { (e.target as HTMLVideoElement).pause(); }}
         />
         <div className="video-overlay" />
-        <button
-          className="unmute-btn"
-          onClick={handleUnmute}
-          data-testid="button-unmute"
-          aria-label={isMuted ? "Ton einschalten" : "Ton ausschalten"}
-        >
-          {isMuted ? "🔇 Ton an" : "🔊 Ton aus"}
-        </button>
       </div>
 
       {/* ARTISTS SECTION */}
