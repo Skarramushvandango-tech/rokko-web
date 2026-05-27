@@ -198,144 +198,136 @@
 
   /* ════════════════════════════════════
      ARTIST DROPDOWN
-     — Höhe = Inhalt (endet unter dem Text)
-     — Breite = exakt wie die Seite
   ════════════════════════════════════ */
   .dropdown-overlay {
     position: fixed; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.55); z-index: 20;
+    background: rgba(0,0,0,0.6); z-index: 20;
   }
   .dropdown-fixed {
     position: fixed;
     left: 50%; transform: translateX(-50%);
-    /* Volle Seitenbreite — gleich wie die Artist-Fotos darüber */
-    width: 100%;
-    max-width: 480px;
-    /* top und max-height werden per inline-style gesetzt */
+    width: calc(100% - 44px);
+    max-width: 400px;
     z-index: 21;
     display: flex; flex-direction: column;
-    background: linear-gradient(135deg, #1a0808 0%, #0f0404 100%);
-    border: 2px solid #B81C09;
-    border-radius: clamp(12px, 2.5dvh, 26px);
-    box-shadow: 0 0 24px rgba(197,31,9,0.35), 0 4px 32px rgba(0,0,0,0.7);
+    background: linear-gradient(160deg, #1c0808 0%, #0d0303 100%);
+    border: 1.5px solid #B81C09;
+    border-radius: clamp(14px, 2.6dvh, 24px);
+    box-shadow: 0 0 0 1px rgba(184,28,9,0.15), 0 0 28px rgba(197,31,9,0.28), 0 8px 40px rgba(0,0,0,0.85);
     overflow: hidden;
-    animation: dd-in 0.2s ease-out;
+    animation: dd-in 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   @media (orientation: landscape), (min-width: 600px) {
-    .dropdown-fixed { max-width: min(520px, 67dvh); }
+    .dropdown-fixed { max-width: min(420px, 60dvh); }
   }
   @keyframes dd-in {
-    from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+    from { transform: translateX(-50%) translateY(18px); opacity: 0; }
     to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
   }
 
-  .dropdown-inner {
-    flex: 0 0 auto;
-    padding: clamp(8px, 1.4dvh, 16px);
-    display: flex; flex-direction: row; align-items: stretch;
-    gap: 0;
-    position: relative;
+  /* HEADER: Artist-Foto + Name */
+  .dd-header {
+    display: flex; flex-direction: row; align-items: center;
+    gap: clamp(8px, 1.4dvh, 14px);
+    padding: clamp(10px, 1.8dvh, 16px) clamp(12px, 2dvh, 18px) clamp(8px, 1.3dvh, 12px);
+    border-bottom: 1px solid rgba(88,12,3,0.5);
+  }
+  .dd-artist-photo {
+    flex: 0 0 clamp(56px, 9.5dvh, 82px);
+    width: clamp(56px, 9.5dvh, 82px);
+    height: clamp(56px, 9.5dvh, 82px);
+    border-radius: clamp(8px, 1.4dvh, 14px);
+    border: 1.5px solid #580C03;
+    overflow: hidden; background: #0a0a0a; flex-shrink: 0;
+  }
+  .dd-artist-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .dd-name-block {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    height: clamp(56px, 9.5dvh, 82px);
     overflow: hidden;
   }
+  .dd-name-line {
+    display: block;
+    font-size: clamp(18px, 3.2dvh, 30px);
+    font-weight: bold; color: #ffffff;
+    line-height: 1.1; white-space: nowrap; letter-spacing: -0.01em;
+  }
+  .dd-name-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: clamp(14px, 2.4dvh, 22px);
+    margin-top: clamp(1px, 0.2dvh, 3px);
+  }
 
-  /* LEFT COLUMN */
-  .dd-col-left {
+  /* BODY: Bio + Cover/Links */
+  .dd-body {
+    display: flex; flex-direction: row;
+    gap: clamp(8px, 1.3dvh, 13px);
+    padding: clamp(8px, 1.4dvh, 13px) clamp(12px, 2dvh, 18px);
+    align-items: flex-start;
+  }
+  .dd-bio {
     flex: 1 1 0; min-width: 0;
-    display: flex; flex-direction: column;
-    gap: clamp(4px, 0.7dvh, 8px);
-    padding-right: clamp(6px, 1dvh, 12px);
+    font-size: clamp(10px, 1.32dvh, 12px);
+    color: #bbb; line-height: 1.62;
+    text-align: justify; word-break: break-word; hyphens: auto;
   }
-  .dd-top-row {
-    display: flex; flex-direction: row; align-items: flex-start;
-    gap: clamp(5px, 0.8dvh, 10px); flex-shrink: 0;
+  .dd-side {
+    flex: 0 0 clamp(78px, 13.5dvh, 112px);
+    display: flex; flex-direction: column; align-items: center;
+    gap: clamp(4px, 0.65dvh, 6px);
+    border-left: 1px solid rgba(88,12,3,0.6);
+    padding-left: clamp(8px, 1.3dvh, 13px);
   }
-  /* Artist-Bild im Popup: quadratisch */
-  .dd-artist-img {
-    flex: 0 0 clamp(40px, 7dvh, 80px);
-    width: clamp(40px, 7dvh, 80px);
-    height: clamp(40px, 7dvh, 80px);
-    aspect-ratio: 1 / 1;
-    border: 1px solid #580C03;
-    border-radius: clamp(6px, 1.2dvh, 15px);
+  .dd-cover-wrap {
+    width: 100%; aspect-ratio: 1/1;
+    border: 1px solid #580C03; border-radius: 6px;
     overflow: hidden; background: #0a0a0a;
   }
-  .dd-artist-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-  .dd-headline { flex: 1; min-width: 0; padding-top: 2px; }
-  .dd-h3 {
-    font-size: clamp(14px, 3dvh, 36px);
-    font-weight: bold; color: #fff; line-height: 1.0;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .dd-h1 {
-    font-size: clamp(9px, 1.6dvh, 20px);
-    font-weight: bold; color: #ccc; line-height: 1.2; margin-top: 1px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-
-  /* Bio — kein Rahmen, kein Hintergrund, Blocksatz */
-  .dd-bio {
-    flex: 0 0 auto;
-    font-size: clamp(10px, 1.4dvh, 13px);
-    color: #ccc; line-height: 1.55;
-    text-align: justify;
-    word-break: break-word;
-  }
-
-  /* RIGHT COLUMN — eigener dunkler Hintergrund, linke Trennlinie */
-  .dd-right {
-    flex: 0 0 clamp(70px, 13dvh, 140px);
-    display: flex; flex-direction: column; align-items: center;
-    gap: clamp(4px, 0.6dvh, 8px);
-    padding: 0 0 0 clamp(6px, 1dvh, 12px);
-    border-left: 1.5px solid #580C03;
-  }
-  .dd-cover-title {
-    font-size: clamp(7px, 1.2dvh, 12px); color: #aaa;
+  .dd-cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dd-album-title {
+    font-size: clamp(7px, 1.05dvh, 9.5px); color: rgba(255,255,255,0.35);
     text-align: center; font-family: Tahoma, sans-serif; width: 100%;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    margin-top: clamp(2px, 0.3dvh, 4px);
+    letter-spacing: 0.03em; text-transform: uppercase;
   }
-  .dd-cover-img {
-    width: 100%; aspect-ratio: 1 / 1;
-    border: 1.5px solid #580C03; border-radius: 4px;
-    overflow: hidden; background: #0a0a0a;
+  .dd-links {
+    display: flex; flex-direction: column;
+    gap: clamp(3px, 0.5dvh, 5px); width: 100%;
+    margin-top: clamp(1px, 0.2dvh, 3px);
   }
-  .dd-cover-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .dd-social-row {
-    display: flex; gap: clamp(4px, 0.6dvh, 7px);
-    justify-content: center; width: 100%;
-    flex-wrap: wrap;
+  .dd-link-btn {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(3px, 0.45dvh, 5px);
+    padding: clamp(3px, 0.52dvh, 5px) clamp(4px, 0.6dvh, 7px);
+    border-radius: 5px; font-family: Tahoma, sans-serif;
+    font-size: clamp(7.5px, 1.05dvh, 9.5px); font-weight: bold;
+    text-decoration: none; color: #ccc;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(88,12,3,0.7);
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap; width: 100%; letter-spacing: 0.01em;
   }
-  .dd-social-icon {
-    width: clamp(22px, 4dvh, 38px); height: clamp(22px, 4dvh, 38px);
-    border-radius: 5px; overflow: hidden; flex-shrink: 0;
-    position: relative; display: block;
-  }
-  .dd-icon-slice {
-    position: absolute; top: 0; height: 100%; width: 300%;
-    display: block; object-fit: cover;
-  }
-  .dd-icon-apple   { left: 0%;    }
-  .dd-icon-spotify { left: -100%; }
-  .dd-icon-amazon  { left: -200%; }
+  .dd-link-btn svg { flex-shrink: 0; opacity: 0.8; }
+  .dd-link-btn:hover { background: rgba(184,28,9,0.22); border-color: #B81C09; color: #fff; }
+  .dd-link-btn:hover svg { opacity: 1; }
 
-  /* Close — sauber am unteren Rand */
+  /* CLOSE */
   .dd-close-bar {
     flex: 0 0 auto;
     display: flex; align-items: center; justify-content: center;
-    padding: clamp(4px, 0.6dvh, 7px) 0 clamp(3px, 0.5dvh, 6px);
+    padding: clamp(4px, 0.6dvh, 7px) 0 clamp(3px, 0.5dvh, 5px);
     background: transparent; border: none; width: 100%; cursor: pointer;
+    border-top: 1px solid rgba(88,12,3,0.4);
   }
   .dd-close-tab {
     display: inline-flex; align-items: center; gap: 5px;
-    background: #1a0808; border: 1.5px solid #580C03;
-    border-radius: 6px 6px 0 0;
-    padding: clamp(3px, 0.5dvh, 5px) clamp(10px, 2dvh, 20px);
     font-family: Tahoma, sans-serif;
-    font-size: clamp(9px, 1.4dvh, 13px);
-    font-weight: bold; color: #B81C09; letter-spacing: 0.03em;
+    font-size: clamp(9px, 1.3dvh, 11px);
+    font-weight: bold; color: rgba(184,28,9,0.7);
+    letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.15s;
   }
-  .dd-close-tab:hover { background: #250a0a; }
+  .dd-close-bar:hover .dd-close-tab { color: #B81C09; }
 
   /* ════════════════════════════════════
      LEGAL MODALS
