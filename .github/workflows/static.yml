@@ -38,16 +38,7 @@ name: Deploy Rokko! Records
           run: pnpm install
 
         - name: Generate wallpaper manifest
-          run: |
-            node -e "
-            const fs = require('fs');
-            const dir = 'public/assets/wallpaper';
-            const files = fs.readdirSync(dir)
-              .filter(f => /\\.(png|jpg|jpeg|webp)$/i.test(f))
-              .sort();
-            fs.writeFileSync('src/data/wallpapers.json', JSON.stringify(files, null, 2));
-            console.log('Wallpapers found:', files);
-            "
+          run: node scripts/generate-wallpapers.cjs
 
         - name: Build
           run: pnpm run build
