@@ -185,7 +185,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
             />
             <div
               className="dropdown-fixed"
-              style={{ top: `${dropdownTop}px` }}
+              style={{ top: `${dropdownTop}px`, maxHeight: `calc(100dvh - ${dropdownTop}px - 4px)` }}
               data-testid={`dropdown-${selectedArtist.id}`}
             >
               <div className="dropdown-inner">
