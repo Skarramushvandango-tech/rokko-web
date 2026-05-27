@@ -80,7 +80,14 @@ export default function Home() {
   return (
     <div className="rokko-page">
 
-      {/* HEADER VIDEO */}
+      {/*
+        HEADER VIDEO — NICHT AENDERN — DAUERHAFT FESTGELEGT:
+        1. Video laeuft EINMAL durch und stoppt (onEnded pause) — kein loop
+        2. KEIN Play-Button, KEIN Stop-Button, KEINE controls
+        3. loop-Attribut wird NIE hinzugefuegt
+        4. controls-Attribut wird NIE hinzugefuegt
+        5. unmute-Button ist KEIN Play-Button — bleibt unveraendert
+      */}
       <div className="video-header-container" data-testid="header-video">
         <video
           ref={videoRef}

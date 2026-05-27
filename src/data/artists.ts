@@ -27,7 +27,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/sukram-pop.png"),
     cover: asset("/assets/coverartwork/sukram-cover.png"),
     albumTitle: "D. mein Fiebertraum",
-    bio: "Der böse Bube liefert uns mit – Deutschland mein Fiebertraum – eine psychedelische Indie-Rock Experience der Extraklasse. Seine Lyrics sind treffsicher ohne zu beleidigen. Vielmehr ist es ein Klagelied über ein Heimatland, das seine Bewohner wie Nutzvieh über den Hof treibt.",
+    bio: "Der böse Bube liefert uns mit – Deutschland mein Fiebertraum – eine psychedelische Indie-Rock Experience der Extraklasse. Seine Lyrics sind treffsicher ohne zu beleidigen. Vielmehr ist es ein Klagelied, welches Sukram hier zum Besten gibt. Ein Klagelied über ein Heimatland, das seine Bewohner wie Nutzvieh über den Hof treibt – um auch das letzte Bisschen Glück und Wohlstand aus der Gesellschaft zu saugen.",
     links: {
       appleMusic: "https://music.apple.com/de/album/deutschland-mein-fiebertraum-single/1893907436",
       spotify: "https://open.spotify.com/artist/0XabsS6hlubIfQTtJ5ZTkU?si=jnl_P0fpSFuxgaEI_fNz7Q",
@@ -72,7 +72,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/fleur-beunie-pop.png"),
     cover: asset("/assets/coverartwork/beunie-cover.png"),
     albumTitle: "Feu Léger",
-    bio: "Das französische House-Duo lieferte mit Feu Léger 2025 eine French-House-Hymne der Extraklasse. Selbst die Remixe überzeugen leichtfüßig. Es ist aber nicht nur die Liebe zur Musik, welche Fléur und Beunié des Nachts zueinander treibt – die beiden sind auch privat liiert.",
+    bio: "Das französische House-Duo lieferte mit Feu Léger 2025 eine French/House Hymne der Extraklasse. Selbst die Remixe überzeugen leichtfüßig. Es ist aber nicht nur die Liebe zur Musik, welche Fléur und Beunié des Nachts zueinander treibt. Die beiden sind auch privat liiert.",
     links: {
       appleMusic: "https://music.apple.com/de/artist/fl%C3%A9ur-et-beuni%C3%A9/1844299316",
       spotify: "https://open.spotify.com/artist/3TJ6OTJwduYPDW1MBwDnSd?si=eayMaoeYT6i3hvJTC8wL9A",
@@ -117,7 +117,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/anger-uschis-pop.png"),
     cover: asset("/assets/coverartwork/uschis-cover.png"),
     albumTitle: "politisch inkontinent",
-    bio: "Mit dem Debütalbum \u201epolitisch inkontinent\u201c liefert Anger Uschis ein Mahnmal gegen Hass, Hetze und Faschismus. Songs wie \u201elachen f*cken schreien\u201c wurden zu kleinen Hymnen. Multifunktionslos ist das Stück, das der Dummheit auf höchstem textlichen Niveau direkt gegenübertritt.",
+    bio: "Mit dem Debütalbum \u201epolitisch inkontinent\u201c liefert Anger Uschis ein politisch orientiertes Mahnmal gegen Hass, Hetze und Faschismus. Einige Songs wurden bereits zu kleinen Hymnen, wie \u201elachen f*cken schreien\u201c – der sich mit den niederen Gelüsten der Gesellschaft auseinandersetzt. Multifunktionslos bildet auf dem Album das Stück, das der Dummheit, textlich auf sehr hoher Ebene, gegenübertritt. – The Uschis have the high ground",
     links: {
       appleMusic: "https://music.apple.com/de/artist/anger-uschis/1885764250",
       spotify: "https://open.spotify.com/playlist/6PynmXodpYNGmi6m0xKuDP?si=g4wlfy-qS9uDCzKDbYjbqw&pi=YdEbk2Y5T3-4v",
@@ -132,7 +132,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/henri-bellieu-pop.png"),
     cover: asset("/assets/coverartwork/bellieu-cover.png"),
     albumTitle: "La Femme",
-    bio: "Der charmant-markante Franzose liefert mit La Femme seine zweite Ode an die Weiblichkeit. Henri, der in Pariser Bars auftrat, lernte ROKKO!'s Labelchef SkaRamush 2015 in Paris kennen. Diese Freundschaft brachte 2025 mit petite Colibri seinen Einstieg in die Welt der Popmusik.",
+    bio: "Der charmant, markante Franzose liefert mit seiner Single la Femme bereits seine zweite Ode an die Weiblichkeit. Henri, der ab und an in Pariser Bars und Kneipen stand, lernte ROKKO!'s Labelchef SkaRamush bereits 2015 in Paris kennen. Die bis heute andauernde Freundschaft sorgte dann 2025 mit der Debütsingle petite Colibri für seinen Einstieg in die Welt der Popmusik.",
     links: {
       appleMusic: "https://music.apple.com/de/artist/henri-bellieu/1844457359",
       spotify: "https://open.spotify.com/playlist/0CfFyyijTPSRqCn72ADfZM?si=IMIm836_Q4SDDaRx-ZaAnw&pi=XMWVcQ-bSs69-",
