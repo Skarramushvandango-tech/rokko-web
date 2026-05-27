@@ -1,8 +1,8 @@
-name: Deploy Rokko! Records to GitHub Pages
+name: Deploy Rokko! Records
 
 on:
   push:
-    branches: ["main"]
+    branches: ["rebuild"]
   workflow_dispatch:
 
 permissions:
@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          BASE_PATH: /
+          BASE_PATH: /rokko-web/
           NODE_ENV: production
 
       - name: Setup Pages
@@ -49,9 +49,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/public
+          path: dist/
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
-
