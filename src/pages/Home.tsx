@@ -11,6 +11,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
     const [showWallpaper, setShowWallpaper] = useState(false);
     const [showDSE, setShowDSE] = useState(false);
     const [showImpressum, setShowImpressum] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef<HTMLVideoElement>(null);
     const gridRef = useRef<HTMLDivElement>(null);
     const [dropdownTop, setDropdownTop] = useState<number>(0);
@@ -21,10 +22,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 
     const handleArtistClick = useCallback(
       (id: string) => {
-        if (openArtist === id) {
-          setOpenArtist(null);
-          return;
-        }
+        if (openArtist === id) { setOpenArtist(null); return; }
         if (gridRef.current) {
           const rect = gridRef.current.getBoundingClientRect();
           setDropdownTop(rect.bottom);
@@ -33,6 +31,20 @@ import { useState, useRef, useCallback, useEffect } from "react";
       },
       [openArtist],
     );
+
+    const handleMuteToggle = useCallback(() => {
+      const video = videoRef.current;
+      if (!video) return;
+      if (isMuted) {
+        video.muted = false;
+        video.currentTime = 0;
+        video.play().catch(() => {});
+        setIsMuted(false);
+      } else {
+        video.muted = true;
+        setIsMuted(true);
+      }
+    }, [isMuted]);
 
     useEffect(() => {
       const video = videoRef.current;
@@ -58,6 +70,14 @@ import { useState, useRef, useCallback, useEffect } from "react";
             onEnded={(e) => { (e.target as HTMLVideoElement).pause(); }}
           />
           <div className="video-overlay" />
+          <button
+            className="unmute-btn"
+            onClick={handleMuteToggle}
+            data-testid="button-unmute"
+            aria-label={isMuted ? "Ton einschalten" : "Ton ausschalten"}
+          >
+            {isMuted ? "🔇 Ton an" : "🔊 Ton aus"}
+          </button>
         </div>
 
         {/* ARTISTS SECTION */}
@@ -94,7 +114,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
           </div>
         </div>
 
-        {/* WIR SIND ROKKO BANNER */}
+        {/* WIR SIND ROKKO — volle Breite */}
         <div className="wirsindrokko-wrap">
           <img
             src={asset("/assets/banners/wirsindrokko.png")}
@@ -105,7 +125,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
           />
         </div>
 
-        {/* BIGSOCIALBAR */}
+        {/* BIGSOCIALBAR — volle Breite */}
         <div className="social-bar-container" data-testid="social-bar">
           <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
           <div className="social-bar-links">
@@ -117,7 +137,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
           </div>
         </div>
 
-        {/* MERCH + WALLPAPER STRIP */}
+        {/* MERCH + WALLPAPER */}
         <div className="merch-wallpaper-strip">
           <div className="merch-wallpaper-row">
             <a
@@ -127,7 +147,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
               className="merch-link"
               data-testid="link-merch"
             >
-              <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise – Shop Now" loading="lazy" decoding="async" />
+              <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise" loading="lazy" decoding="async" />
             </a>
             <div className="wallpaper-link-wrap">
               <img
@@ -144,12 +164,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 
         {/* HEADSETBUNS */}
         <div className="headsetbuns-wrap">
-          <img
-            src={asset("/assets/banners/headsetbuns.png")}
-            alt="Rokko! Records"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src={asset("/assets/banners/headsetbuns.png")} alt="Rokko! Records" loading="lazy" decoding="async" />
         </div>
 
         {/* FOOTER */}
@@ -159,7 +174,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
           <button className="footer-link" onClick={() => setShowImpressum(true)}>Impressum</button>
         </div>
 
-        {/* DROPDOWN OVERLAY */}
+        {/* DROPDOWN */}
         {selectedArtist && (
           <>
             <div
@@ -174,7 +189,6 @@ import { useState, useRef, useCallback, useEffect } from "react";
               data-testid={`dropdown-${selectedArtist.id}`}
             >
               <div className="dropdown-inner">
-                {/* LEFT COLUMN: artist image + headline + bio */}
                 <div className="dd-col-left">
                   <div className="dd-top-row">
                     <div className="dd-artist-img">
@@ -187,8 +201,6 @@ import { useState, useRef, useCallback, useEffect } from "react";
                   </div>
                   <div className="dd-bio">{selectedArtist.bio}</div>
                 </div>
-
-                {/* RIGHT COLUMN: cover + social */}
                 <div className="dd-right">
                   <div className="dd-bg-frame" />
                   <div className="dd-cover-title">{selectedArtist.albumTitle}</div>
@@ -211,7 +223,6 @@ import { useState, useRef, useCallback, useEffect } from "react";
                   </div>
                 </div>
               </div>
-
               <button className="dd-close-bar" onClick={() => setOpenArtist(null)} data-testid="dropdown-close">
                 <span className="dd-close-tab">
                   <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
