@@ -12,7 +12,6 @@
   :root {
     --background: 0 0% 5%;
     --foreground: 0 0% 95%;
-    /* Konsistenter Sektions-Abstand */
     --section-gap: clamp(6px, 1dvh, 12px);
   }
 
@@ -81,7 +80,7 @@
 
   /* ────────────────────────────────────
      ARTISTS SECTION
-     Halbtransparente Corporate-Fläche
+     Halbtransparente Corporate-Fläche (#0a0303 @ 62%)
   ──────────────────────────────────── */
   .artists-section {
     flex: 0 0 20.1dvh;
@@ -187,7 +186,7 @@
 
   /* ────────────────────────────────────
      MERCH + WALLPAPER STRIP
-     Gleicher Abstand wie bigsocialbar→artists
+     Gleicher Abstand nach oben wie bigsocialbar→artists
   ──────────────────────────────────── */
   .merch-wallpaper-strip {
     flex: 0 0 auto;
@@ -531,7 +530,7 @@
   /* ════════════════════════════════════
      WALLPAPER POPUP
   ════════════════════════════════════ */
-  .wallpaper-overlay {
+  .wallpaper-popup-overlay {
     position: fixed; inset: 0;
     background: rgba(0,0,0,0.88);
     z-index: 100;
@@ -549,21 +548,13 @@
     overflow-y: auto;
     position: relative;
   }
-  .wallpaper-close {
+  .wallpaper-popup-close {
     position: absolute; top: 10px; right: 14px;
     color: #888; background: transparent; border: none;
     font-size: 20px; cursor: pointer; font-weight: bold;
   }
-  .wallpaper-close:hover { color: #fff; }
-  .wallpaper-title {
-    font-family: Tahoma, sans-serif;
-    font-size: clamp(13px, 1.8dvh, 17px);
-    font-weight: bold;
-    color: #B81C09;
-    margin-bottom: 12px;
-    padding-right: 24px;
-  }
-  .wallpaper-grid {
+  .wallpaper-popup-close:hover { color: #fff; }
+  .wallpaper-popup-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -573,20 +564,48 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    text-decoration: none;
+    cursor: pointer;
   }
   .wallpaper-item img {
     width: 100%;
-    aspect-ratio: 9/19;
+    aspect-ratio: 9 / 19;
     object-fit: cover;
     border-radius: 8px;
     border: 1.5px solid #580C03;
     display: block;
   }
-  .wallpaper-item span {
-    font-family: Tahoma, sans-serif;
-    font-size: clamp(9px, 1.3dvh, 11px);
-    color: rgba(255,255,255,0.6);
-    text-align: center;
+  .wallpaper-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px 0 8px;
   }
+  .wallpaper-nav-btn {
+    background: #1a0808;
+    border: 1.5px solid #580C03;
+    border-radius: 6px;
+    color: #B81C09;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px 14px;
+    line-height: 1.4;
+  }
+  .wallpaper-nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .wallpaper-nav-btn:not(:disabled):hover { background: #250a0a; }
+  .wallpaper-download-btn {
+    display: inline-block;
+    background: #B81C09;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 28px;
+    font-family: Tahoma, sans-serif;
+    font-size: clamp(12px, 1.6dvh, 15px);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+  .wallpaper-download-btn:hover { background: #d42010; }
   
