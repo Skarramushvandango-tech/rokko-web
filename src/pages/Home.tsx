@@ -48,6 +48,7 @@ export default function Home() {
           autoPlay
           playsInline
           muted
+          preload="auto"
           disablePictureInPicture
           disableRemotePlayback
           onEnded={(e) => { (e.target as HTMLVideoElement).pause(); }}

@@ -261,7 +261,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: min(480px, 100vw);
-  bottom: 6.24dvh;
+  bottom: max(16px, 6.24dvh);
   z-index: 21;
   padding: 0 7.35%;
   animation: dd-in 0.3s ease-out;
@@ -383,7 +383,7 @@ body {
   font-size: clamp(9px, 1.5dvh, 17px);
   color: #ddd;
   line-height: 1.45;
-  max-height: 13dvh;
+  max-height: max(100px, 13dvh);
   overflow-y: auto;
   padding: 0 clamp(2px, 0.4dvh, 4px);
 }
