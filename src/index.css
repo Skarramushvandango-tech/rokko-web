@@ -377,43 +377,121 @@
      WALLPAPER POPUP
   ════════════════════════════════════ */
   .wallpaper-popup-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100;
-    display: flex; align-items: center; justify-content: center; padding: 16px;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 12px;
   }
   .wallpaper-popup {
-    background: #110606; border: 2px solid #B81C09; border-radius: 14px;
-    padding: 18px 16px 14px; width: 100%; max-width: 420px;
-    max-height: 85dvh; overflow-y: auto; position: relative;
+    background: #110606; border: 2px solid #B81C09; border-radius: 16px;
+    width: 100%; max-width: 440px; max-height: 88dvh;
+    display: flex; flex-direction: column; overflow: hidden; position: relative;
+  }
+
+  /* HEADER */
+  .wallpaper-popup-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px 10px; border-bottom: 1px solid rgba(88,12,3,0.5);
+    flex-shrink: 0;
+  }
+  .wallpaper-popup-title {
+    font-family: Tahoma, sans-serif; font-weight: bold;
+    font-size: 15px; color: #B81C09; letter-spacing: 0.06em; text-transform: uppercase;
   }
   .wallpaper-popup-close {
-    position: absolute; top: 10px; right: 14px;
-    color: #888; background: transparent; border: none;
-    font-size: 20px; cursor: pointer; font-weight: bold;
+    color: #666; background: transparent; border: none;
+    font-size: 19px; cursor: pointer; font-weight: bold; line-height: 1;
+    padding: 0 2px; transition: color 0.15s;
   }
   .wallpaper-popup-close:hover { color: #fff; }
-  .wallpaper-popup-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .wallpaper-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+
+  /* GRID VIEW */
+  .wallpaper-grid-scroll {
+    overflow-y: auto; flex: 1 1 0; padding: 12px;
+    scrollbar-width: thin; scrollbar-color: #580C03 transparent;
+  }
+  .wallpaper-popup-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  }
+  .wallpaper-item {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 4px; cursor: pointer; position: relative;
+  }
   .wallpaper-item img {
-    width: 100%; aspect-ratio: 9 / 19;
-    object-fit: cover; border-radius: 8px;
-    border: 1.5px solid #580C03; display: block;
+    width: 100%; aspect-ratio: 9 / 19; object-fit: cover;
+    border-radius: 7px; border: 1.5px solid #580C03; display: block;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
   }
-  .wallpaper-nav {
+  .wallpaper-item:hover img {
+    transform: scale(1.04); border-color: #B81C09;
+    box-shadow: 0 0 10px rgba(184,28,9,0.5);
+  }
+  .wallpaper-item-num {
+    font-family: Tahoma, sans-serif; font-size: 10px;
+    color: rgba(255,255,255,0.3); letter-spacing: 0.05em;
+  }
+
+  /* LIGHTBOX VIEW */
+  .wallpaper-lightbox {
+    display: flex; flex-direction: column; flex: 1 1 0; overflow: hidden;
+  }
+  .wallpaper-lightbox-main {
     display: flex; align-items: center; justify-content: center;
-    gap: 16px; margin: 12px 0 8px;
+    flex: 1 1 0; gap: 6px; padding: 10px 6px 6px; min-height: 0;
   }
-  .wallpaper-nav-btn {
-    background: #1a0808; border: 1.5px solid #580C03; border-radius: 6px;
-    color: #B81C09; font-size: 22px; font-weight: bold;
-    cursor: pointer; padding: 2px 14px; line-height: 1.4;
+  .wallpaper-lightbox-img-wrap {
+    flex: 1 1 0; display: flex; align-items: center; justify-content: center;
+    min-height: 0; max-height: 100%;
   }
-  .wallpaper-nav-btn:disabled { opacity: 0.3; cursor: default; }
-  .wallpaper-nav-btn:not(:disabled):hover { background: #250a0a; }
+  .wallpaper-lightbox-img-wrap img {
+    max-height: 52dvh; max-width: 100%; object-fit: contain;
+    border-radius: 8px; border: 1.5px solid #580C03; display: block;
+  }
+  .wallpaper-arrow {
+    flex-shrink: 0; background: rgba(26,8,8,0.8); border: 1.5px solid #580C03;
+    border-radius: 8px; color: #B81C09; font-size: 26px; font-weight: bold;
+    cursor: pointer; padding: 6px 10px; line-height: 1;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .wallpaper-arrow:disabled { opacity: 0.2; cursor: default; }
+  .wallpaper-arrow:not(:disabled):hover { background: #250a0a; border-color: #B81C09; }
+
+  /* META BAR */
+  .wallpaper-lightbox-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 14px 6px; flex-shrink: 0;
+  }
+  .wallpaper-counter {
+    font-family: Tahoma, sans-serif; font-size: 12px; color: #666;
+  }
   .wallpaper-download-btn {
-    display: inline-block; background: #B81C09; color: #fff;
-    border: none; border-radius: 8px; padding: 8px 28px;
-    font-family: Tahoma, sans-serif; font-size: clamp(12px, 1.6dvh, 15px);
-    font-weight: bold; cursor: pointer; margin-top: 4px;
+    background: #B81C09; color: #fff; border: none; border-radius: 7px;
+    padding: 6px 18px; font-family: Tahoma, sans-serif;
+    font-size: 12px; font-weight: bold; cursor: pointer;
+    transition: background 0.15s;
   }
   .wallpaper-download-btn:hover { background: #d42010; }
+  .wallpaper-back-btn {
+    background: transparent; border: none; color: #666;
+    font-family: Tahoma, sans-serif; font-size: 12px;
+    cursor: pointer; transition: color 0.15s; padding: 0;
+  }
+  .wallpaper-back-btn:hover { color: #ccc; }
+
+  /* FILMSTRIP */
+  .wallpaper-filmstrip {
+    display: flex; flex-direction: row; gap: 6px;
+    overflow-x: auto; padding: 6px 12px 10px;
+    scrollbar-width: thin; scrollbar-color: #580C03 transparent;
+    flex-shrink: 0; border-top: 1px solid rgba(88,12,3,0.35);
+  }
+  .wallpaper-filmstrip-thumb {
+    flex: 0 0 36px; width: 36px; cursor: pointer;
+    border-radius: 5px; overflow: hidden;
+    border: 1.5px solid transparent; transition: border-color 0.15s, opacity 0.15s;
+    opacity: 0.5;
+  }
+  .wallpaper-filmstrip-thumb img {
+    width: 100%; aspect-ratio: 9 / 19; object-fit: cover; display: block;
+  }
+  .wallpaper-filmstrip-thumb:hover { opacity: 0.8; }
+  .wallpaper-filmstrip-thumb.active { border-color: #B81C09; opacity: 1; }
   
