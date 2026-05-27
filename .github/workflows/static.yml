@@ -2,7 +2,7 @@ name: Deploy Rokko! Records
 
 on:
   push:
-    branches: ["rebuild"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
