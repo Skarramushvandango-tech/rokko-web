@@ -80,6 +80,22 @@ export default function Home() {
   return (
     <div className="rokko-page">
 
+      {/* SEO: Für Google lesbar, visuell versteckt */}
+      <div className="seo-only">
+        <h1>Rokko! Records – Unabhängiges Musiklabel</h1>
+        <p>Rokko! Records ist ein unabhängiges Musiklabel aus Deutschland mit Künstlern aus den Bereichen Indie, Rock, Electronic, Pop und House.</p>
+        <section>
+          <h2>Unsere Künstler</h2>
+          {ARTISTS.map((artist) => (
+            <article key={artist.id}>
+              <h3>{artist.name}</h3>
+              <p>{artist.bio}</p>
+              <p>Aktuelles Release: {artist.albumTitle}</p>
+            </article>
+          ))}
+        </section>
+      </div>
+
       {/*
         HEADER VIDEO — NICHT AENDERN — DAUERHAFT FESTGELEGT:
         1. Video laeuft EINMAL durch und stoppt (onEnded pause) — kein loop
