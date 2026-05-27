@@ -166,40 +166,42 @@ export default function Home() {
             data-testid={`dropdown-${selectedArtist.id}`}
           >
             <div className="dropdown-inner">
-              <div className="dd-left">
-                <div className="dd-artist-img">
-                  <img src={selectedArtist.image} alt={selectedArtist.name} />
+              <div className="dd-header">
+                <div className="dd-left">
+                  <div className="dd-artist-img">
+                    <img src={selectedArtist.image} alt={selectedArtist.name} />
+                  </div>
+                  <div className="dd-headline">
+                    <div className="dd-h3">{selectedArtist.nameH3}</div>
+                    {selectedArtist.nameH1 && <div className="dd-h1">{selectedArtist.nameH1}</div>}
+                  </div>
                 </div>
-                <div className="dd-headline">
-                  <div className="dd-h3">{selectedArtist.nameH3}</div>
-                  {selectedArtist.nameH1 && <div className="dd-h1">{selectedArtist.nameH1}</div>}
+
+                <div className="dd-right">
+                  <div className="dd-bg-frame" />
+                  <div className="dd-cover-title">{selectedArtist.albumTitle}</div>
+                  <div className="dd-cover-img">
+                    <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} />
+                  </div>
+                  <div className="dd-social-row">
+                    {selectedArtist.links.appleMusic
+                      ? <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" data-testid={`link-apple-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Apple Music" className="dd-icon-slice dd-icon-apple" /></a>
+                      : <span className="dd-social-icon dd-icon-inactive" />
+                    }
+                    {selectedArtist.links.spotify
+                      ? <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" data-testid={`link-spotify-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Spotify" className="dd-icon-slice dd-icon-spotify" /></a>
+                      : <span className="dd-social-icon dd-icon-inactive" />
+                    }
+                    {selectedArtist.links.amazon
+                      ? <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" data-testid={`link-amazon-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Amazon Music" className="dd-icon-slice dd-icon-amazon" /></a>
+                      : <span className="dd-social-icon dd-icon-inactive" />
+                    }
+                  </div>
                 </div>
               </div>
 
-              <div className="dd-right">
-                <div className="dd-bg-frame" />
-                <div className="dd-cover-title">{selectedArtist.albumTitle}</div>
-                <div className="dd-cover-img">
-                  <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} />
-                </div>
-                <div className="dd-social-row">
-                  {selectedArtist.links.appleMusic
-                    ? <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" data-testid={`link-apple-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Apple Music" className="dd-icon-slice dd-icon-apple" /></a>
-                    : <span className="dd-social-icon dd-icon-inactive" />
-                  }
-                  {selectedArtist.links.spotify
-                    ? <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" data-testid={`link-spotify-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Spotify" className="dd-icon-slice dd-icon-spotify" /></a>
-                    : <span className="dd-social-icon dd-icon-inactive" />
-                  }
-                  {selectedArtist.links.amazon
-                    ? <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" data-testid={`link-amazon-${selectedArtist.id}`} className="dd-social-icon"><img src={asset("/assets/banners/socialmedia-icons.png")} alt="Amazon Music" className="dd-icon-slice dd-icon-amazon" /></a>
-                    : <span className="dd-social-icon dd-icon-inactive" />
-                  }
-                </div>
-              </div>
+              <div className="dd-bio">{selectedArtist.bio}</div>
             </div>
-
-            <div className="dd-bio">{selectedArtist.bio}</div>
 
             <button className="dd-close-bar" onClick={() => setOpenArtist(null)} data-testid="dropdown-close">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
