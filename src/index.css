@@ -207,8 +207,9 @@
   .dropdown-fixed {
     position: fixed;
     left: 50%; transform: translateX(-50%);
-    width: calc(100% - 44px);
-    max-width: 400px;
+    /* NICHT AENDERN: Breite = Artist-Grid-Breite (100% minus 7.35% Padding pro Seite) */
+    width: calc(100% - 14.7%);
+    max-width: min(409px, 85.3dvw);
     z-index: 21;
     display: flex; flex-direction: column;
     background: linear-gradient(160deg, #1c0808 0%, #0d0303 100%);
@@ -219,7 +220,7 @@
     animation: dd-in 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   @media (orientation: landscape), (min-width: 600px) {
-    .dropdown-fixed { max-width: min(420px, 60dvh); }
+    .dropdown-fixed { width: calc(100% - 14.7%); max-width: min(444px, 57dvh); }
   }
   @keyframes dd-in {
     from { transform: translateX(-50%) translateY(18px); opacity: 0; }
