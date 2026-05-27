@@ -231,9 +231,10 @@
   .dropdown-inner {
     flex: 0 0 auto;
     padding: clamp(8px, 1.4dvh, 16px);
-    display: flex; flex-direction: row; align-items: flex-start;
-    gap: clamp(5px, 0.9dvh, 10px);
+    display: flex; flex-direction: row; align-items: stretch;
+    gap: 0;
     position: relative;
+    overflow: hidden;
   }
 
   /* LEFT COLUMN */
@@ -241,6 +242,7 @@
     flex: 1 1 0; min-width: 0;
     display: flex; flex-direction: column;
     gap: clamp(4px, 0.7dvh, 8px);
+    padding-right: clamp(6px, 1dvh, 12px);
   }
   .dd-top-row {
     display: flex; flex-direction: row; align-items: flex-start;
@@ -259,74 +261,55 @@
   .dd-artist-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
   .dd-headline { flex: 1; min-width: 0; padding-top: 2px; }
   .dd-h3 {
-    font-size: clamp(16px, 3.5dvh, 40px);
+    font-size: clamp(14px, 3dvh, 36px);
     font-weight: bold; color: #fff; line-height: 1.0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .dd-h1 {
-    font-size: clamp(9px, 1.8dvh, 22px);
+    font-size: clamp(9px, 1.6dvh, 20px);
     font-weight: bold; color: #ccc; line-height: 1.2; margin-top: 1px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Bio — Blocksatz, Auto-Höhe nach Textlänge */
+  /* Bio — kein Rahmen, kein Hintergrund, Blocksatz */
   .dd-bio {
     flex: 0 0 auto;
-    font-size: clamp(11px, 1.5dvh, 14px);
-    color: #ddd; line-height: 1.5;
+    font-size: clamp(10px, 1.4dvh, 13px);
+    color: #ccc; line-height: 1.55;
     text-align: justify;
-    overflow-y: auto;
-    padding: clamp(4px, 0.6dvh, 8px);
     word-break: break-word;
-    border: 1px solid #580C03;
-    border-radius: clamp(4px, 0.8dvh, 8px);
-    background: rgba(0,0,0,0.25);
   }
-  .dd-bio::-webkit-scrollbar { width: 3px; }
-  .dd-bio::-webkit-scrollbar-track { background: transparent; }
-  .dd-bio::-webkit-scrollbar-thumb { background: #580C03; border-radius: 3px; }
 
-  /* RIGHT COLUMN */
+  /* RIGHT COLUMN — eigener dunkler Hintergrund, linke Trennlinie */
   .dd-right {
-    flex: 0 0 clamp(65px, 12dvh, 130px);
-    align-self: flex-start;
+    flex: 0 0 clamp(70px, 13dvh, 140px);
     display: flex; flex-direction: column; align-items: center;
-    gap: clamp(3px, 0.5dvh, 6px); position: relative;
-  }
-  .dd-bg-frame {
-    position: absolute;
-    right: -clamp(8px, 1.4dvh, 16px);
-    top: -clamp(8px, 1.4dvh, 16px);
-    bottom: -clamp(8px, 1.4dvh, 16px);
-    width: calc(100% + clamp(8px, 1.4dvh, 16px));
-    border: 1.5px solid #580C03;
-    border-radius: 0 clamp(10px, 2dvh, 20px) clamp(10px, 2dvh, 20px) 0;
-    background: #0d0404; z-index: 0;
+    gap: clamp(4px, 0.6dvh, 8px);
+    padding: 0 0 0 clamp(6px, 1dvh, 12px);
+    border-left: 1.5px solid #580C03;
   }
   .dd-cover-title {
-    position: relative; z-index: 1;
-    font-size: clamp(7px, 1.3dvh, 13px); color: #fff;
+    font-size: clamp(7px, 1.2dvh, 12px); color: #aaa;
     text-align: center; font-family: Tahoma, sans-serif; width: 100%;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-top: clamp(2px, 0.3dvh, 4px);
   }
   .dd-cover-img {
-    position: relative; z-index: 1;
     width: 100%; aspect-ratio: 1 / 1;
-    border: 2px solid #fff; border-radius: 4px;
+    border: 1.5px solid #580C03; border-radius: 4px;
     overflow: hidden; background: #0a0a0a;
   }
   .dd-cover-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .dd-social-row {
-    position: relative; z-index: 1;
-    display: flex; gap: clamp(3px, 0.5dvh, 5px);
+    display: flex; gap: clamp(4px, 0.6dvh, 7px);
     justify-content: center; width: 100%;
+    flex-wrap: wrap;
   }
   .dd-social-icon {
-    width: clamp(18px, 3.5dvh, 32px); height: clamp(18px, 3.5dvh, 32px);
-    border-radius: 4px; overflow: hidden; flex-shrink: 0;
+    width: clamp(22px, 4dvh, 38px); height: clamp(22px, 4dvh, 38px);
+    border-radius: 5px; overflow: hidden; flex-shrink: 0;
     position: relative; display: block;
   }
-  .dd-icon-inactive { background: #444; opacity: 0.35; }
   .dd-icon-slice {
     position: absolute; top: 0; height: 100%; width: 300%;
     display: block; object-fit: cover;
