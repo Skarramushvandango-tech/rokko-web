@@ -1,12 +1,24 @@
-name: Build Rokko! Records
+name: Deploy Rokko! Records
 
 on:
   push:
     branches: ["rebuild"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,11 +40,17 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          BASE_PATH: /
+          BASE_PATH: /rokko-web/
           NODE_ENV: production
 
-      - name: Upload dist
-        uses: actions/upload-artifact@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: rokko-dist
           path: dist/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
