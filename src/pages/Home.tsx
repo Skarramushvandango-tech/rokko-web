@@ -133,7 +133,7 @@ export default function Home() {
               aria-label={`Artist: ${artist.name}`}
               onKeyDown={(e) => e.key === "Enter" && handleArtistClick(artist.id)}
             >
-              <img src={artist.image} alt={artist.name} loading="lazy" decoding="async" />
+              <img src={artist.image} alt={artist.name} loading="lazy" decoding="async" style={{ objectPosition: artist.imgPosition }} />
               <div className="artist-tile-label">
                 {artist.nameH1
                   ? <><span className="tile-sub">{artist.nameH3.toUpperCase()}</span><span className="tile-main">{artist.nameH1.toUpperCase()}</span></>
