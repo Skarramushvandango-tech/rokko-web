@@ -283,6 +283,7 @@
   /* RIGHT COLUMN */
   .dd-right {
     flex: 0 0 clamp(65px, 12dvh, 130px);
+    align-self: flex-start;
     display: flex; flex-direction: column; align-items: center;
     gap: clamp(3px, 0.5dvh, 6px); position: relative;
   }
