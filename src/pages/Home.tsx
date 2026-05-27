@@ -219,7 +219,7 @@ export default function Home() {
             style={{ top: `${dropdownTop}px` }}
             data-testid={`dropdown-${selectedArtist.id}`}
           >
-            {/* HEADER: Artist-Foto + Name */}
+            {/* HEADER: Artist-Foto + Name + Cover */}
             <div className="dd-header">
               <div className="dd-artist-photo">
                 <img src={selectedArtist.image} alt={selectedArtist.name} loading="lazy" decoding="async" />
@@ -230,15 +230,15 @@ export default function Home() {
                   <span className="dd-name-line dd-name-sub">{selectedArtist.nameH1}</span>
                 )}
               </div>
+              <div className="dd-header-cover">
+                <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} loading="lazy" decoding="async" />
+              </div>
             </div>
 
-            {/* BODY: Bio links, Cover + Links rechts */}
+            {/* BODY: Bio + Links */}
             <div className="dd-body">
               <div className="dd-bio">{selectedArtist.bio}</div>
               <div className="dd-side">
-                <div className="dd-cover-wrap">
-                  <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} loading="lazy" decoding="async" />
-                </div>
                 <div className="dd-album-title">{selectedArtist.albumTitle}</div>
                 <div className="dd-links">
                   {selectedArtist.links.appleMusic && (
