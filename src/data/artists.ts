@@ -45,7 +45,7 @@ export const ARTISTS: Artist[] = [
     imgPosition: "40% 20%",
     cover: asset("/assets/coverartwork/vandango-cover.png"),
     albumTitle: "Neurocentric",
-    bio: "Der Gründer und Labelchef von ROKKO! Records ist selbst als Künstler aktiv. Mit SkaRamush Vandango verbindet er elektronische Sounds mit roher Energie. Neurocentric steht für seine Fähigkeit, komplexe Themen in mitreißende, dichte Tracks zu verwandeln, die unter die Haut gehen.",
+    bio: "SkaRamush Vandango macht seit 2005 Musik – ein alter Hase im Business, der die Szene in- und auswendig kennt. Als Gründer und Labelchef von ROKKO! Records vereint er unternehmerisches Denken mit echter künstlerischer Leidenschaft. Sein kommendes Album Neurocentric erzählt die Geschichte eines undiagnostizierten Autisten und wie er eine Welt wahrnimmt, die nie wirklich für ihn gemacht schien. Eine ehrliche, dichte und zutiefst persönliche Reise durch Klang, Wahrnehmung und Emotion.",
     links: {
       appleMusic: undefined,
       spotify: undefined,
@@ -93,7 +93,7 @@ export const ARTISTS: Artist[] = [
     imgPosition: "center 20%",
     cover: asset("/assets/coverartwork/sinclair-cover.png"),
     albumTitle: "waste",
-    bio: "Anthony Sinclair ist eine der charakterstärksten Stimmen im ROKKO! Roster. Mit waste liefert er einen Track, der unter die Haut geht – eine Auseinandersetzung mit Verschwendung auf allen Ebenen des Lebens. Sinclair's Musik ist so präzise wie sie unnachgiebig und direkt ist.",
+    bio: "Anthony Sinclair ist eine der charakterstärksten Stimmen im ROKKO! Roster. Mit waste liefert er einen Track, der unter die Haut geht – eine kompromisslose Auseinandersetzung mit Verschwendung auf allen Ebenen des Lebens. Sinclair's Musik ist so präzise wie sie unnachgiebig ist. Die Single waste erscheint Ende Juni.",
     links: {
       appleMusic: undefined,
       spotify: undefined,
