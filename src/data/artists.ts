@@ -27,7 +27,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/sukram-pop.png"),
     cover: asset("/assets/coverartwork/sukram-cover.png"),
     albumTitle: "D. mein Fiebertraum",
-    bio: "Der böse Bube liefert uns mit – Deutschland mein Fiebertraum – eine psychedelische Indie-Rock Experience der Extraklasse. Seine Lyrics sind treffsicher ohne zu beleidigen. Vielmehr ist es ein Klagelied, welches Sukram hier zum Besten gibt. Ein Klagelied über ein Heimatland, das seine Bewohner wie Nutzvieh über den Hof treibt, um auch das letzte Bisschen Glück und Wohlstand aus der Gesellschaft zu saugen.",
+    bio: "Der böse Bube liefert uns mit – Deutschland mein Fiebertraum – eine psychedelische Indie-Rock Experience der Extraklasse. Seine Lyrics sind treffsicher ohne zu beleidigen. Vielmehr ist es ein Klagelied über ein Heimatland, das seine Bewohner wie Nutzvieh über den Hof treibt.",
     links: {
       appleMusic: "https://music.apple.com/de/album/deutschland-mein-fiebertraum-single/1893907436",
       spotify: "https://open.spotify.com/artist/0XabsS6hlubIfQTtJ5ZTkU?si=jnl_P0fpSFuxgaEI_fNz7Q",
@@ -42,7 +42,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/skaramush-vandango-pop.png"),
     cover: asset("/assets/coverartwork/vandango-cover.png"),
     albumTitle: "Neurocentric",
-    bio: "Der Gründer und Labelchef von ROKKO! Records ist selbst als Künstler aktiv. Mit seinem Projekt SkaRamush Vandango verbindet er elektronische Sounds mit roher Energie. Neurocentric steht für seine Fähigkeit, komplexe Themen in mitreißende Tracks zu verwandeln.",
+    bio: "Der Gründer und Labelchef von ROKKO! Records ist selbst als Künstler aktiv. Mit SkaRamush Vandango verbindet er elektronische Sounds mit roher Energie. Neurocentric steht für seine Fähigkeit, komplexe Themen in mitreißende, dichte Tracks zu verwandeln, die unter die Haut gehen.",
     links: {
       appleMusic: undefined,
       spotify: undefined,
@@ -57,7 +57,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/skank-schablonski-pop.png"),
     cover: asset("/assets/coverartwork/schablonski-cover.png"),
     albumTitle: "Kohle raus",
-    bio: "Skank Schablonski steht für kompromisslosen Sound und ehrliche Texte. Mit Kohle raus liefert er einen Track, der keine Gefangenen macht. Schablonski's Stil ist einzigartig – roh, direkt und unverkennbar.",
+    bio: "Skank Schablonski steht für kompromisslosen Sound und ehrliche Texte. Mit Kohle raus liefert er einen Track, der keine Gefangenen macht. Schablonski's Stil ist einzigartig – roh, direkt und absolut unverkennbar. Seine Musik spricht für sich: laut, klar und ohne Umschweife.",
     links: {
       appleMusic: undefined,
       spotify: undefined,
@@ -87,7 +87,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/anthony-sinclair-pop.png"),
     cover: asset("/assets/coverartwork/sinclair-cover.png"),
     albumTitle: "waste",
-    bio: "Anthony Sinclair ist einer der charakterstärksten Stimmen im ROKKO! Roster. Mit waste liefert er einen Track, der unter die Haut geht – eine Auseinandersetzung mit Verschwendung auf allen Ebenen. Sinclair's Musik ist so präzise wie sein Name.",
+    bio: "Anthony Sinclair ist eine der charakterstärksten Stimmen im ROKKO! Roster. Mit waste liefert er einen Track, der unter die Haut geht – eine Auseinandersetzung mit Verschwendung auf allen Ebenen des Lebens. Sinclair's Musik ist so präzise wie sie unnachgiebig und direkt ist.",
     links: {
       appleMusic: undefined,
       spotify: undefined,
@@ -102,7 +102,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/silberstreif-pop.png"),
     cover: asset("/assets/coverartwork/silberstreif-cover.png"),
     albumTitle: "Flammend Herz",
-    bio: "Silberstreif steht für Hoffnung in düsteren Zeiten. Das Debütalbum Flammend Herz verbrennt alle Brücken zur Mittelmäßigkeit. Mit einer Mischung aus Emotion und handwerklicher Präzision schafft Silberstreif Musik, die nachwirkt.",
+    bio: "Silberstreif steht für Hoffnung in düsteren Zeiten. Das Debütalbum Flammend Herz verbrennt alle Brücken zur Mittelmäßigkeit. Mit einer Mischung aus Emotion und handwerklicher Präzision schafft Silberstreif Musik, die lange nachwirkt und sich tief ins Gedächtnis einbrennt.",
     links: {
       appleMusic: "https://music.apple.com/de/album/flammend-herz-single/1893949801",
       spotify: "https://open.spotify.com/artist/6IRLmlTvLsC41s71PiI5AW?si=e1_xR6ohQsujIPMmyDvHLg",
@@ -117,7 +117,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/anger-uschis-pop.png"),
     cover: asset("/assets/coverartwork/uschis-cover.png"),
     albumTitle: "politisch inkontinent",
-    bio: `Mit dem Debütalbum \u201epolitisch inkontinent\u201c liefert Anger Uschis ein politisch orientiertes Mahnmal gegen Hass, Hetze und Faschismus. Einige Songs wurden bereits zu kleinen Hymnen, wie \u201elachen f*cken schreien\u201c, der sich mit den niederen Gelüsten der Gesellschaft auseinandersetzt. Multifunktionslos bildet auf dem Album das Stück, das der Dummheit textlich auf sehr hoher Ebene gegenübertritt. \u2013 The Uschis have the high ground`,
+    bio: "Mit dem Debütalbum \u201epolitisch inkontinent\u201c liefert Anger Uschis ein Mahnmal gegen Hass, Hetze und Faschismus. Songs wie \u201elachen f*cken schreien\u201c wurden zu kleinen Hymnen. Multifunktionslos ist das Stück, das der Dummheit auf höchstem textlichen Niveau direkt gegenübertritt.",
     links: {
       appleMusic: "https://music.apple.com/de/artist/anger-uschis/1885764250",
       spotify: "https://open.spotify.com/playlist/6PynmXodpYNGmi6m0xKuDP?si=g4wlfy-qS9uDCzKDbYjbqw&pi=YdEbk2Y5T3-4v",
@@ -132,7 +132,7 @@ export const ARTISTS: Artist[] = [
     image: asset("/assets/artist-images/henri-bellieu-pop.png"),
     cover: asset("/assets/coverartwork/bellieu-cover.png"),
     albumTitle: "La Femme",
-    bio: `Der charmant-markante Franzose liefert mit seiner Single La Femme bereits seine zweite Ode an die Weiblichkeit. Henri, der ab und an in Pariser Bars und Kneipen stand, lernte ROKKO!'s Labelchef SkaRamush bereits 2015 in Paris kennen. Die bis heute andauernde Freundschaft sorgte dann 2025 mit der Debütsingle \u201epetite Colibri\u201c für seinen Einstieg in die Welt der Popmusik.`,
+    bio: "Der charmant-markante Franzose liefert mit La Femme seine zweite Ode an die Weiblichkeit. Henri, der in Pariser Bars auftrat, lernte ROKKO!'s Labelchef SkaRamush 2015 in Paris kennen. Diese Freundschaft brachte 2025 mit petite Colibri seinen Einstieg in die Welt der Popmusik.",
     links: {
       appleMusic: "https://music.apple.com/de/artist/henri-bellieu/1844457359",
       spotify: "https://open.spotify.com/playlist/0CfFyyijTPSRqCn72ADfZM?si=IMIm836_Q4SDDaRx-ZaAnw&pi=XMWVcQ-bSs69-",
