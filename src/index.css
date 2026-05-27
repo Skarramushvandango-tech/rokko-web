@@ -198,8 +198,8 @@
 
   /* ════════════════════════════════════
      ARTIST DROPDOWN
-     — Streckt sich bis zum unteren Rand
-     — Bio-Text 14px (mobil lesbar)
+     — Höhe = Inhalt (endet unter dem Text)
+     — Breite = exakt wie die Seite
   ════════════════════════════════════ */
   .dropdown-overlay {
     position: fixed; left: 0; right: 0; bottom: 0;
@@ -208,8 +208,8 @@
   .dropdown-fixed {
     position: fixed;
     left: 50%; transform: translateX(-50%);
-    width: min(480px, 100vw);
-    bottom: 0;
+    width: 100%; max-width: 480px;
+    /* top und max-height werden per inline-style gesetzt */
     z-index: 21;
     padding: 0 7.35%;
     display: flex; flex-direction: column;
@@ -221,7 +221,7 @@
     animation: dd-in 0.2s ease-out;
   }
   @media (orientation: landscape), (min-width: 600px) {
-    .dropdown-fixed { width: min(520px, 67dvh); }
+    .dropdown-fixed { max-width: min(520px, 67dvh); }
   }
   @keyframes dd-in {
     from { transform: translateX(-50%) translateY(16px); opacity: 0; }
@@ -229,17 +229,16 @@
   }
 
   .dropdown-inner {
-    flex: 1 1 0; min-height: 0;
+    flex: 0 0 auto;
     padding: clamp(8px, 1.4dvh, 16px);
-    display: flex; flex-direction: row; align-items: stretch;
+    display: flex; flex-direction: row; align-items: flex-start;
     gap: clamp(5px, 0.9dvh, 10px);
     position: relative;
-    overflow: hidden;
   }
 
   /* LEFT COLUMN */
   .dd-col-left {
-    flex: 1 1 0; min-width: 0; min-height: 0;
+    flex: 1 1 0; min-width: 0;
     display: flex; flex-direction: column;
     gap: clamp(4px, 0.7dvh, 8px);
   }
@@ -270,11 +269,12 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Bio — 14px Mindestgröße für Handy, scrollt falls nötig */
+  /* Bio — Blocksatz, Auto-Höhe nach Textlänge */
   .dd-bio {
-    flex: 1 1 0; min-height: 0;
-    font-size: clamp(14px, 1.8dvh, 16px);
+    flex: 0 0 auto;
+    font-size: clamp(11px, 1.5dvh, 14px);
     color: #ddd; line-height: 1.5;
+    text-align: justify;
     overflow-y: auto;
     padding: clamp(4px, 0.6dvh, 8px);
     word-break: break-word;
