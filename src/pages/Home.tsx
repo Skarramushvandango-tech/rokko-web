@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { ARTISTS } from "../data/artists";
 import type { Artist } from "../data/artists";
 import WallpaperPopup from "../components/WallpaperPopup";
+import ReleasesPopup from "../components/ReleasesPopup";
 import DSEModal from "../components/DSEModal";
 import ImpressumModal from "../components/ImpressumModal";
 import { asset } from "../utils/asset";
@@ -33,6 +34,7 @@ function IconAmazon() {
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
   const [showWallpaper, setShowWallpaper] = useState(false);
+  const [showReleases, setShowReleases] = useState(false);
   const [showDSE, setShowDSE] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -78,13 +80,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (openArtist || showWallpaper) {
+    if (openArtist || showWallpaper || showReleases) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [openArtist, showWallpaper]);
+  }, [openArtist, showWallpaper, showReleases]);
 
   return (
     <div className="rokko-page">
@@ -193,9 +195,19 @@ export default function Home() {
         </div>
       </div>
 
-      {/* MERCH + WALLPAPER */}
+      {/* RELEASES + MERCH + WALLPAPER */}
       <div className="merch-wallpaper-strip">
         <div className="merch-wallpaper-row">
+          <div className="releases-link-wrap">
+            <img
+              src={asset("/assets/banners/releases.png")}
+              alt="Rokko! Releases"
+              onClick={() => setShowReleases(true)}
+              data-testid="button-releases"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <a
             href="https://rokko-records-klumpatsch.myspreadshop.de/"
             target="_blank"
@@ -300,6 +312,7 @@ export default function Home() {
       )}
 
       {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
+      {showReleases && <ReleasesPopup onClose={() => setShowReleases(false)} />}
       {showDSE && <DSEModal onClose={() => setShowDSE(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
     </div>
