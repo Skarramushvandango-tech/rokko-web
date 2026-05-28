@@ -93,7 +93,8 @@
     content: '';
     position: absolute;
     left: 0; right: 0;
-    top: 12.5%; bottom: 12.5%;
+    top: 50%; transform: translateY(-50%);
+    aspect-ratio: 8 / 3;
     background: #0a0a0a;
     border-radius: clamp(8px, 1.8dvh, 18px);
     z-index: 0;
