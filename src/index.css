@@ -117,7 +117,7 @@
     width: 100%;
     overflow: hidden;
     margin: 0;
-    padding: var(--section-gap) 0;
+    padding: 0 0 var(--section-gap) 0;
   }
   .wirsindrokko-wrap img {
     width: 100%;
