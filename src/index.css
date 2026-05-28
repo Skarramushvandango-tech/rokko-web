@@ -76,41 +76,17 @@
     display: flex; flex-direction: column;
     padding: 0 7.35%;
     background: rgba(0,0,0,0.6);
-    position: relative;
-    overflow: hidden;
-  }
-  .artists-section::before {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    top: 50%; transform: translateY(-50%);
-    height: 33%;
-    background: #B81C09;
-    z-index: 0;
   }
   .artists-label-img {
     flex: 0 0 auto;
     height: clamp(14px, 2.5dvh, 26px); width: auto;
     display: block; object-fit: contain; object-position: left center;
     margin: 0.4dvh 0 0.3dvh;
-    position: relative; z-index: 1;
   }
   /* 4 Spalten, Zeilen auto → aspect-ratio macht die Kacheln quadratisch */
   .artist-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
     gap: clamp(3px, 0.55dvh, 7px);
-    position: relative;
-    z-index: 1;
-  }
-  .artist-grid::before {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    top: 50%; transform: translateY(-50%);
-    aspect-ratio: 8 / 3;
-    background: #0a0a0a;
-    border-radius: clamp(8px, 1.8dvh, 18px);
-    z-index: 0;
   }
   .artist-tile {
     aspect-ratio: 1 / 1; width: 100%; display: block;
