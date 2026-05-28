@@ -234,8 +234,24 @@
     color: #B81C09; font-size: 11px; font-weight: bold;
     letter-spacing: 0.2em; text-transform: uppercase;
   }
+  .releases-popup-artist-scroll {
+    max-height: 280px; overflow-y: auto; overflow-x: hidden;
+    padding-right: 6px; margin-right: -6px;
+    scrollbar-width: thin; scrollbar-color: #B81C09 transparent;
+  }
+  .releases-popup-artist-scroll::-webkit-scrollbar { width: 6px; }
+  .releases-popup-artist-scroll::-webkit-scrollbar-track { background: transparent; }
+  .releases-popup-artist-scroll::-webkit-scrollbar-thumb {
+    background: #B81C09; border-radius: 3px;
+  }
+  .releases-popup-artist-scroll::-webkit-scrollbar-thumb:hover { background: #d42010; }
   .releases-popup-artist-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  }
+  .releases-popup-artist-placeholder {
+    width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;
+    border-radius: 4px; background: #1a1a1a; color: #B81C09;
+    font-weight: bold; font-size: 22px;
   }
   .releases-popup-artist {
     background: transparent; border: 1px solid rgba(184,28,9,0.5);

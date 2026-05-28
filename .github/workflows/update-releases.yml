@@ -1,0 +1,41 @@
+name: Update Spotify releases.json
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # hourly at :17
+  workflow_dispatch:        # allow manual trigger
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-releases
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch playlist from Spotify
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+        run: node scripts/update-releases.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "rokko-releases-bot"
+          git config user.email "bot@rokko-records.local"
+          if [ -n "$(git status --porcelain data/releases.json)" ]; then
+            git add data/releases.json
+            git commit -m "chore(releases): auto-update from Spotify playlist"
+            git push
+          else
+            echo "No changes."
+          fi
