@@ -68,9 +68,19 @@
     font-family: Tahoma, sans-serif; cursor: pointer;
   }
 
-  /* ────────────────────────────────────
-     ARTISTS SECTION — corporate bg, quadratische Kacheln
-  ──────────────────────────────────── */
+  /* ════════════════════════════════════════════════════════════════
+     ARTISTS SECTION — GESPERRT — NICHT ÄNDERN OHNE FREIGABE
+     ────────────────────────────────────────────────────────────────
+     ⚠️  ABSOLUT VERBOTEN OHNE AUSDRÜCKLICHE FREIGABE DES BESITZERS:
+     - padding-bottom hinzufügen (MUSS 0 BLEIBEN!)
+     - margin-bottom hinzufügen
+     - ::before / ::after pseudo-elemente hinzufügen
+     - background ändern (MUSS rgba(0,0,0,0.6) BLEIBEN!)
+     - border-radius / border auf .artists-section oder .artist-grid
+     - Padding/Margin auf .artist-grid
+     Die Kacheln MÜSSEN direkt an der wirsindrokko.png kleben.
+     Bei Änderungswunsch: ZUERST den Besitzer fragen!
+  ════════════════════════════════════════════════════════════════ */
   .artists-section {
     flex: 0 0 auto;
     display: flex; flex-direction: column;
