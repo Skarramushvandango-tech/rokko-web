@@ -10,6 +10,23 @@ interface WallpaperPopupProps {
   onClose: () => void;
 }
 
+async function downloadImage(url: string, filename: string) {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+  } catch {
+    window.open(url, "_blank");
+  }
+}
+
 export default function WallpaperPopup({ onClose }: WallpaperPopupProps) {
   const [selected, setSelected] = useState<number | null>(null);
   const filmstripRef = useRef<HTMLDivElement>(null);
@@ -17,10 +34,8 @@ export default function WallpaperPopup({ onClose }: WallpaperPopupProps) {
   const handleDownload = useCallback(() => {
     if (selected === null) return;
     const url = WALLPAPERS[selected];
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `rokko-wallpaper-${String(selected + 1).padStart(2, "0")}.png`;
-    a.click();
+    const filename = `rokko-wallpaper-${String(selected + 1).padStart(2, "0")}.png`;
+    downloadImage(url, filename);
   }, [selected]);
 
   const handlePrev = useCallback(() => {
@@ -47,6 +62,11 @@ export default function WallpaperPopup({ onClose }: WallpaperPopupProps) {
     const thumb = filmstripRef.current.children[selected] as HTMLElement;
     if (thumb) thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [selected]);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
 
   return (
     <div
