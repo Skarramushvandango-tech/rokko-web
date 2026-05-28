@@ -255,7 +255,6 @@ export default function Home() {
             <div className="dd-body">
               <div className="dd-bio">{selectedArtist.bio}</div>
               <div className="dd-side">
-                <div className="dd-album-title">{selectedArtist.albumTitle}</div>
                 <div className="dd-links">
                   {selectedArtist.links.appleMusic && (
                     <a
