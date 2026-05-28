@@ -4,11 +4,6 @@ export interface ArtistLinks {
   appleMusic?: string;
   spotify?: string;
   amazon?: string;
-  soundcloud?: string;
-  beatport?: string;
-  youtube?: string;
-  tiktok?: string;
-  facebook?: string;
 }
 
 export interface Artist {
@@ -38,7 +33,6 @@ export const ARTISTS: Artist[] = [
     links: {
       appleMusic: "https://music.apple.com/de/album/deutschland-mein-fiebertraum-single/1893907436",
       spotify: "https://open.spotify.com/artist/0XabsS6hlubIfQTtJ5ZTkU?si=jnl_P0fpSFuxgaEI_fNz7Q",
-      soundcloud: "https://on.soundcloud.com/4AamGVxekfGxUZnA8L",
     },
   },
   {
@@ -78,7 +72,6 @@ export const ARTISTS: Artist[] = [
     links: {
       appleMusic: "https://music.apple.com/de/artist/fl%C3%A9ur-et-beuni%C3%A9/1844299316",
       spotify: "https://open.spotify.com/artist/3TJ6OTJwduYPDW1MBwDnSd?si=eayMaoeYT6i3hvJTC8wL9A",
-      soundcloud: "https://on.soundcloud.com/Kbt1h7TfrPexsg8eo7",
     },
   },
   {
@@ -123,11 +116,6 @@ export const ARTISTS: Artist[] = [
       appleMusic: "https://music.apple.com/de/artist/anger-uschis/1885764250",
       spotify: "https://open.spotify.com/playlist/6PynmXodpYNGmi6m0xKuDP?si=g4wlfy-qS9uDCzKDbYjbqw&pi=YdEbk2Y5T3-4v",
       amazon: "https://www.amazon.de/gp/product/B0GWQY499Q/",
-      beatport: "https://www.beatport.com/de/release/oh-junge/6401437",
-      soundcloud: "https://on.soundcloud.com/yF0Gsyrta73BPuIGPx",
-      youtube: "https://www.youtube.com/@AngerUschis",
-      tiktok: "https://www.tiktok.com/@angeruschis",
-      facebook: "https://www.facebook.com/profile.php?id=61587765440458",
     },
   },
   {

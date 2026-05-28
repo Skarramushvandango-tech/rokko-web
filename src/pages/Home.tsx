@@ -30,46 +30,6 @@ function IconAmazon() {
   );
 }
 
-function IconSoundCloud() {
-  return (
-    <svg width="13" height="9" viewBox="0 0 60 36" fill="currentColor" aria-hidden="true">
-      <path d="M0 26.5C0 30.6 3.4 34 7.5 34H48c6.6 0 12-5.4 12-12 0-5.8-4.2-10.8-9.8-11.8C49.4 4.5 44.2 0 38 0c-5.6 0-10.4 3.4-12.6 8.4C23.6 7.5 21.9 7 20 7c-5.5 0-10 4.5-10 10 0 .2 0 .4.1.6C4.6 18.4 0 22 0 26.5z"/>
-    </svg>
-  );
-}
-
-function IconBeatport() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c4.142 0 7.5 3.358 7.5 7.5s-3.358 7.5-7.5 7.5S4.5 16.142 4.5 12 7.858 4.5 12 4.5zm0 2.5c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5zm0 2c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3z"/>
-    </svg>
-  );
-}
-
-function IconYouTube() {
-  return (
-    <svg width="13" height="10" viewBox="0 0 24 17" fill="currentColor" aria-hidden="true">
-      <path d="M23.5 2.5s-.2-1.7-1-2.4c-.9-1-2-.9-2.5-.9C17 0 12 0 12 0S7 0 4 .2c-.5.1-1.6 0-2.5.9C.7.8.5 2.5.5 2.5S.3 4.5.3 6.4v1.8c0 2 .2 4 .2 4s.2 1.7 1 2.4c.9 1 2.2.9 2.8 1 2 .2 8.7.2 8.7.2s5 0 8-.2c.5-.1 1.6 0 2.5-.9.8-.7 1-2.4 1-2.4s.2-2 .2-3.9V6.4C23.7 4.5 23.5 2.5 23.5 2.5zM9.7 11V4.9L16 8l-6.3 3z"/>
-    </svg>
-  );
-}
-
-function IconTikTok() {
-  return (
-    <svg width="10" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.7a4.85 4.85 0 01-1.01-.01z"/>
-    </svg>
-  );
-}
-
-function IconFacebook() {
-  return (
-    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-    </svg>
-  );
-}
-
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
   const [showWallpaper, setShowWallpaper] = useState(false);
@@ -306,7 +266,7 @@ export default function Home() {
             </div>
 
             {/* STREAMING LINKS */}
-            {(selectedArtist.links.appleMusic || selectedArtist.links.spotify || selectedArtist.links.amazon || selectedArtist.links.soundcloud || selectedArtist.links.beatport || selectedArtist.links.youtube || selectedArtist.links.tiktok || selectedArtist.links.facebook) && (
+            {(selectedArtist.links.appleMusic || selectedArtist.links.spotify || selectedArtist.links.amazon) && (
               <div className="dd-links-row">
                 {selectedArtist.links.spotify && (
                   <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-spotify-${selectedArtist.id}`}>
@@ -321,31 +281,6 @@ export default function Home() {
                 {selectedArtist.links.amazon && (
                   <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-amazon-${selectedArtist.id}`}>
                     <IconAmazon /><span>Amazon Music</span>
-                  </a>
-                )}
-                {selectedArtist.links.soundcloud && (
-                  <a href={selectedArtist.links.soundcloud} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-soundcloud-${selectedArtist.id}`}>
-                    <IconSoundCloud /><span>SoundCloud</span>
-                  </a>
-                )}
-                {selectedArtist.links.beatport && (
-                  <a href={selectedArtist.links.beatport} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-beatport-${selectedArtist.id}`}>
-                    <IconBeatport /><span>Beatport</span>
-                  </a>
-                )}
-                {selectedArtist.links.youtube && (
-                  <a href={selectedArtist.links.youtube} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-youtube-${selectedArtist.id}`}>
-                    <IconYouTube /><span>YouTube</span>
-                  </a>
-                )}
-                {selectedArtist.links.tiktok && (
-                  <a href={selectedArtist.links.tiktok} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-tiktok-${selectedArtist.id}`}>
-                    <IconTikTok /><span>TikTok</span>
-                  </a>
-                )}
-                {selectedArtist.links.facebook && (
-                  <a href={selectedArtist.links.facebook} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-facebook-${selectedArtist.id}`}>
-                    <IconFacebook /><span>Facebook</span>
                   </a>
                 )}
               </div>
