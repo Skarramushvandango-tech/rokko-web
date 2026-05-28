@@ -312,7 +312,12 @@ export default function Home() {
       )}
 
       {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
-      {showReleases && <ReleasesPopup onClose={() => setShowReleases(false)} />}
+      {showReleases && (
+        <ReleasesPopup
+          onClose={() => setShowReleases(false)}
+          onSelectArtist={(id) => setOpenArtist(id)}
+        />
+      )}
       {showDSE && <DSEModal onClose={() => setShowDSE(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
     </div>

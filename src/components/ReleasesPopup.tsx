@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ARTISTS } from "../data/artists";
 
 const PLAYLIST_ID = "6GBZNBRcta3DF6MCU5cVAP";
 const COVER_URL = "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da8464c9611ed07d1be704bb738d";
@@ -6,14 +7,22 @@ const PLAYER_URL = `https://open.spotify.com/embed/playlist/${PLAYLIST_ID}?utm_s
 
 interface Props {
   onClose: () => void;
+  onSelectArtist?: (id: string) => void;
 }
 
-export default function ReleasesPopup({ onClose }: Props) {
+export default function ReleasesPopup({ onClose, onSelectArtist }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  const handleArtistClick = (id: string) => {
+    if (onSelectArtist) {
+      onSelectArtist(id);
+    }
+    onClose();
+  };
 
   return (
     <div
@@ -55,6 +64,26 @@ export default function ReleasesPopup({ onClose }: Props) {
           loading="lazy"
           className="releases-popup-player"
         />
+
+        <div className="releases-popup-divider">
+          <span>Künstler auswählen</span>
+        </div>
+
+        <div className="releases-popup-artist-grid">
+          {ARTISTS.map((a) => (
+            <button
+              key={a.id}
+              type="button"
+              className="releases-popup-artist"
+              onClick={() => handleArtistClick(a.id)}
+              data-testid={`releases-artist-${a.id}`}
+              aria-label={`${a.name} öffnen`}
+            >
+              <img src={a.cover} alt={a.name} loading="lazy" decoding="async" />
+              <div className="releases-popup-artist-name">{a.nameH3 || a.name}</div>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
