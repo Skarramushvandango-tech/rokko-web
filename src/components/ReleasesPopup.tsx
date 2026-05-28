@@ -100,13 +100,6 @@ export default function ReleasesPopup({ onClose, onSelectArtist }: Props) {
         >
           ✕
         </button>
-        <img
-          className="releases-popup-cover"
-          src={cover}
-          alt="ROKKO! Releases Cover"
-          loading="lazy"
-          decoding="async"
-        />
         <div className="releases-popup-title-wrap">
           <div className="releases-popup-title">ROKKO!</div>
           <div className="releases-popup-subtitle">Releases</div>
@@ -115,7 +108,7 @@ export default function ReleasesPopup({ onClose, onSelectArtist }: Props) {
           src={PLAYER_URL}
           title="Rokko! Records Spotify Playlist"
           width="100%"
-          height="80"
+          height="420"
           frameBorder="0"
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"

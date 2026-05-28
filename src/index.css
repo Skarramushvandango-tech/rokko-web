@@ -198,6 +198,7 @@
     background: #0a0a0a; padding: 14px;
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
+    max-height: 90vh; overflow-y: auto;
   }
   .releases-popup-close {
     position: absolute; top: -14px; right: -14px;
@@ -211,7 +212,7 @@
     width: 100%; aspect-ratio: 1 / 1; display: block;
     border-radius: 8px; object-fit: cover;
   }
-  .releases-popup-title-wrap { text-align: center; padding: 14px 0 12px; }
+  .releases-popup-title-wrap { text-align: center; padding: 2px 0 12px; }
   .releases-popup-title {
     color: #fff; font-weight: bold; font-size: 28px;
     letter-spacing: 0.05em; line-height: 1; text-transform: uppercase;
