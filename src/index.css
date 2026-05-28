@@ -134,6 +134,7 @@
 
   /* ════════════════════════════════════
      WIR SIND ROKKO — IMMER VOLLE BREITE — NICHT ÄNDERN
+     ABSTAND UNTEN FESTGELEGT — NICHT ENTFERNEN
   ════════════════════════════════════ */
   .wirsindrokko-wrap {
     flex: 0 0 auto;
@@ -141,6 +142,7 @@
     overflow: hidden;
     padding: 0;
     margin: 0;
+    padding-bottom: var(--section-gap);
   }
   .wirsindrokko-wrap img {
     width: 100%;

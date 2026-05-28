@@ -4,6 +4,11 @@ export interface ArtistLinks {
   appleMusic?: string;
   spotify?: string;
   amazon?: string;
+  soundcloud?: string;
+  beatport?: string;
+  youtube?: string;
+  tiktok?: string;
+  facebook?: string;
 }
 
 export interface Artist {
@@ -33,7 +38,7 @@ export const ARTISTS: Artist[] = [
     links: {
       appleMusic: "https://music.apple.com/de/album/deutschland-mein-fiebertraum-single/1893907436",
       spotify: "https://open.spotify.com/artist/0XabsS6hlubIfQTtJ5ZTkU?si=jnl_P0fpSFuxgaEI_fNz7Q",
-      amazon: undefined,
+      soundcloud: "https://on.soundcloud.com/4AamGVxekfGxUZnA8L",
     },
   },
   {
@@ -46,11 +51,7 @@ export const ARTISTS: Artist[] = [
     cover: asset("/assets/coverartwork/vandango-cover.png"),
     albumTitle: "Neurocentric",
     bio: "SkaRamush Vandango macht seit 2005 Musik – ein alter Hase im Business, der die Szene in- und auswendig kennt. Als Gründer und Labelchef von ROKKO! Records vereint er unternehmerisches Denken mit echter künstlerischer Leidenschaft. Sein kommendes Album Neurocentric erzählt die Geschichte eines undiagnostizierten Autisten und wie er eine Welt wahrnimmt, die nie wirklich für ihn gemacht schien. Eine ehrliche, dichte und zutiefst persönliche Reise durch Klang, Wahrnehmung und Emotion.",
-    links: {
-      appleMusic: undefined,
-      spotify: undefined,
-      amazon: undefined,
-    },
+    links: {},
   },
   {
     id: "skank-schablonski",
@@ -62,11 +63,7 @@ export const ARTISTS: Artist[] = [
     cover: asset("/assets/coverartwork/schablonski-cover.png"),
     albumTitle: "Kohle raus",
     bio: "Skank Schablonski steht für kompromisslosen Sound und ehrliche Texte. Mit Kohle raus liefert er einen Track, der keine Gefangenen macht. Schablonski's Stil ist einzigartig – roh, direkt und absolut unverkennbar. Seine Musik spricht für sich: laut, klar und ohne Umschweife.",
-    links: {
-      appleMusic: undefined,
-      spotify: undefined,
-      amazon: undefined,
-    },
+    links: {},
   },
   {
     id: "fleur-beunie",
@@ -81,7 +78,7 @@ export const ARTISTS: Artist[] = [
     links: {
       appleMusic: "https://music.apple.com/de/artist/fl%C3%A9ur-et-beuni%C3%A9/1844299316",
       spotify: "https://open.spotify.com/artist/3TJ6OTJwduYPDW1MBwDnSd?si=eayMaoeYT6i3hvJTC8wL9A",
-      amazon: undefined,
+      soundcloud: "https://on.soundcloud.com/Kbt1h7TfrPexsg8eo7",
     },
   },
   {
@@ -94,11 +91,7 @@ export const ARTISTS: Artist[] = [
     cover: asset("/assets/coverartwork/sinclair-cover.png"),
     albumTitle: "waste",
     bio: "Anthony Sinclair ist eine der charakterstärksten Stimmen im ROKKO! Roster. Mit waste liefert er einen Track, der unter die Haut geht – eine kompromisslose Auseinandersetzung mit Verschwendung auf allen Ebenen des Lebens. Sinclair's Musik ist so präzise wie sie unnachgiebig ist. Die Single waste erscheint Ende Juni.",
-    links: {
-      appleMusic: undefined,
-      spotify: undefined,
-      amazon: undefined,
-    },
+    links: {},
   },
   {
     id: "silberstreif",
@@ -130,6 +123,11 @@ export const ARTISTS: Artist[] = [
       appleMusic: "https://music.apple.com/de/artist/anger-uschis/1885764250",
       spotify: "https://open.spotify.com/playlist/6PynmXodpYNGmi6m0xKuDP?si=g4wlfy-qS9uDCzKDbYjbqw&pi=YdEbk2Y5T3-4v",
       amazon: "https://www.amazon.de/gp/product/B0GWQY499Q/",
+      beatport: "https://www.beatport.com/de/release/oh-junge/6401437",
+      soundcloud: "https://on.soundcloud.com/yF0Gsyrta73BPuIGPx",
+      youtube: "https://www.youtube.com/@AngerUschis",
+      tiktok: "https://www.tiktok.com/@angeruschis",
+      facebook: "https://www.facebook.com/profile.php?id=61587765440458",
     },
   },
   {
