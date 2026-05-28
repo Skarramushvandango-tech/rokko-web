@@ -77,6 +77,15 @@ export default function Home() {
     video.play().catch(() => {});
   }, []);
 
+  useEffect(() => {
+    if (openArtist) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [openArtist]);
+
   return (
     <div className="rokko-page">
 
@@ -235,69 +244,50 @@ export default function Home() {
             style={{ top: `${dropdownTop}px` }}
             data-testid={`dropdown-${selectedArtist.id}`}
           >
-            {/* HEADER: Artist-Foto + Name + Cover */}
-            <div className="dd-header">
-              <div className="dd-artist-photo">
-                <img src={selectedArtist.image} alt={selectedArtist.name} loading="lazy" decoding="async" />
-              </div>
-              <div className="dd-name-block">
-                <span className="dd-name-line">{selectedArtist.nameH3}</span>
-                {selectedArtist.nameH1 && (
-                  <span className="dd-name-line dd-name-sub">{selectedArtist.nameH1}</span>
-                )}
-              </div>
-              <div className="dd-header-cover">
-                <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} loading="lazy" decoding="async" />
-              </div>
-            </div>
-
-            {/* BODY: Bio + Links */}
-            <div className="dd-body">
-              <div className="dd-bio">{selectedArtist.bio}</div>
-              <div className="dd-side">
-                <div className="dd-links">
-                  {selectedArtist.links.appleMusic && (
-                    <a
-                      href={selectedArtist.links.appleMusic}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="dd-link-btn"
-                      data-testid={`link-apple-${selectedArtist.id}`}
-                    >
-                      <IconApple />
-                      <span>Apple Music</span>
-                    </a>
-                  )}
-                  {selectedArtist.links.spotify && (
-                    <a
-                      href={selectedArtist.links.spotify}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="dd-link-btn"
-                      data-testid={`link-spotify-${selectedArtist.id}`}
-                    >
-                      <IconSpotify />
-                      <span>Spotify</span>
-                    </a>
-                  )}
-                  {selectedArtist.links.amazon && (
-                    <a
-                      href={selectedArtist.links.amazon}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="dd-link-btn"
-                      data-testid={`link-amazon-${selectedArtist.id}`}
-                    >
-                      <IconAmazon />
-                      <span>Amazon Music</span>
-                    </a>
-                  )}
+            {/* HERO */}
+            <div className="dd-hero">
+              <img className="dd-hero-bg" src={selectedArtist.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+              <div className="dd-hero-gradient" />
+              <button className="dd-close-x" onClick={() => setOpenArtist(null)} data-testid="dropdown-close" aria-label="Schließen">✕</button>
+              <div className="dd-hero-bottom">
+                <div className="dd-hero-name">
+                  <span className="dd-hero-name-top">{selectedArtist.nameH3}</span>
+                  {selectedArtist.nameH1 && <span className="dd-hero-name-main">{selectedArtist.nameH1}</span>}
+                </div>
+                <div className="dd-hero-cover">
+                  <img src={selectedArtist.cover} alt={selectedArtist.albumTitle} loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>
 
-            {/* CLOSE */}
-            <button className="dd-close-bar" onClick={() => setOpenArtist(null)} data-testid="dropdown-close">
+            {/* BIO */}
+            <div className="dd-bio-section">
+              <p className="dd-bio">{selectedArtist.bio}</p>
+            </div>
+
+            {/* STREAMING LINKS */}
+            {(selectedArtist.links.appleMusic || selectedArtist.links.spotify || selectedArtist.links.amazon) && (
+              <div className="dd-links-row">
+                {selectedArtist.links.appleMusic && (
+                  <a href={selectedArtist.links.appleMusic} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-apple-${selectedArtist.id}`}>
+                    <IconApple /><span>Apple Music</span>
+                  </a>
+                )}
+                {selectedArtist.links.spotify && (
+                  <a href={selectedArtist.links.spotify} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-spotify-${selectedArtist.id}`}>
+                    <IconSpotify /><span>Spotify</span>
+                  </a>
+                )}
+                {selectedArtist.links.amazon && (
+                  <a href={selectedArtist.links.amazon} target="_blank" rel="noopener noreferrer" className="dd-link-btn" data-testid={`link-amazon-${selectedArtist.id}`}>
+                    <IconAmazon /><span>Amazon Music</span>
+                  </a>
+                )}
+              </div>
+            )}
+
+            {/* CLOSE BAR */}
+            <button className="dd-close-bar" onClick={() => setOpenArtist(null)}>
               <span className="dd-close-tab">
                 <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
                   <path d="M4 14L10 6L16 14" stroke="#B81C09" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
