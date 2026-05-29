@@ -7,37 +7,23 @@ echo "  Rokko! Records — Release Script"
 echo "══════════════════════════════════════"
 echo ""
 
-# 1. Wallpaper-Manifest aktualisieren
 echo "▶  Wallpaper-Manifest wird generiert..."
 node scripts/generate-wallpapers.cjs
 
-# 2. TypeScript-Check (nur genutzte Dateien)
-echo "▶  TypeScript wird geprüft..."
+echo "▶  TypeScript wird geprueft..."
 npx tsc --noEmit
 
-# 3. Neu bauen
-echo "▶  Build läuft..."
+echo "▶  Lokaler Build laeuft (dist/ bleibt LOKAL)..."
 npm run build
 
-# 4. Alles stagen
-echo "▶  Änderungen werden gestaged..."
-git add dist/ src/ index.html package.json tsconfig.json scripts/
-
-# 5. Prüfen ob es überhaupt etwas zu committen gibt
-if git diff --cached --quiet; then
-  echo ""
-  echo "✓  Nichts geändert – dist ist bereits aktuell."
-  echo ""
-  exit 0
-fi
-
-# 6. Commit mit Zeitstempel
-DATUM=$(date "+%Y-%m-%d %H:%M")
-git commit -m "build: release ${DATUM}"
-
 echo ""
-echo "✓  Fertig! Commit erstellt."
+echo "✓  Build fertig — dist/ ist lokal aktuell."
 echo ""
-echo "  Jetzt noch pushen und auf Netcup deployen:"
-echo "  git push origin main"
+echo "  WICHTIG: dist/ ist in .gitignore — wird NICHT committed."
+echo "  GitHub Pages baut bei jedem Push auf main automatisch neu."
+echo "  Fuer manuelles FTP: dist/ direkt hochladen."
 echo ""
+
+# Nur Quellcode stagen
+echo "▶  Quellcode-Aenderungen stagen..."
+echo "  (KEIN dist/ — ist via .gitignore ausgeschlossen)"
