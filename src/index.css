@@ -71,20 +71,20 @@
   /* ════════════════════════════════════════════════════════════════
      ARTISTS SECTION — GESPERRT — NICHT ÄNDERN OHNE FREIGABE
      ────────────────────────────────────────────────────────────────
-     ⚠️  ABSOLUT VERBOTEN OHNE AUSDRÜCKLICHE FREIGABE DES BESITZERS:
-     - padding-bottom hinzufügen (MUSS 0 BLEIBEN!)
-     - margin-bottom hinzufügen
-     - ::before / ::after pseudo-elemente hinzufügen
+     VOM BESITZER FREIGEGEBEN (Mai 2026):
+     - Der dunkle Hintergrund rgba(0,0,0,0.6) liegt an der wirsindrokko.png AN.
+     - Die Kacheln SCHWEBEN mit Abstand davor → padding-bottom auf
+       .artists-section MUSS BLEIBEN (NICHT auf 0 zurücksetzen!).
+     ⚠️  WEITERHIN VERBOTEN OHNE FREIGABE:
      - background ändern (MUSS rgba(0,0,0,0.6) BLEIBEN!)
      - border-radius / border auf .artists-section oder .artist-grid
-     - Padding/Margin auf .artist-grid
-     Die Kacheln MÜSSEN direkt an der wirsindrokko.png kleben.
+     - Padding/Margin auf .artist-grid (Abstand gehört auf .artists-section)
      Bei Änderungswunsch: ZUERST den Besitzer fragen!
   ════════════════════════════════════════════════════════════════ */
   .artists-section {
     flex: 0 0 auto;
     display: flex; flex-direction: column;
-    padding: 0 7.35% 0 7.35%;
+    padding: 0 7.35% clamp(16px, 3.5dvh, 40px) 7.35%;
     background: rgba(0,0,0,0.6);
   }
   .artists-label-img {
