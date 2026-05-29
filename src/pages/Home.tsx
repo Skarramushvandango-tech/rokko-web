@@ -2,7 +2,6 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { ARTISTS } from "../data/artists";
 import type { Artist } from "../data/artists";
 import WallpaperPopup from "../components/WallpaperPopup";
-import ReleasesPopup from "../components/ReleasesPopup";
 import DSEModal from "../components/DSEModal";
 import ImpressumModal from "../components/ImpressumModal";
 import { asset } from "../utils/asset";
@@ -34,7 +33,6 @@ function IconAmazon() {
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
   const [showWallpaper, setShowWallpaper] = useState(false);
-  const [showReleases, setShowReleases] = useState(false);
   const [showDSE, setShowDSE] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
@@ -80,13 +78,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (openArtist || showWallpaper || showReleases) {
+    if (openArtist || showWallpaper) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [openArtist, showWallpaper, showReleases]);
+  }, [openArtist, showWallpaper]);
 
   return (
     <div className="rokko-page">
@@ -198,16 +196,20 @@ export default function Home() {
       {/* RELEASES + MERCH + WALLPAPER */}
       <div className="merch-wallpaper-strip">
         <div className="merch-wallpaper-row">
-          <div className="releases-link-wrap">
+          <a
+            href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="releases-link-wrap"
+            data-testid="link-releases"
+          >
             <img
               src={asset("/assets/banners/releases.png")}
               alt="Rokko! Releases"
-              onClick={() => setShowReleases(true)}
-              data-testid="button-releases"
               loading="lazy"
               decoding="async"
             />
-          </div>
+          </a>
           <a
             href="https://rokko-records-klumpatsch.myspreadshop.de/"
             target="_blank"
@@ -312,12 +314,6 @@ export default function Home() {
       )}
 
       {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
-      {showReleases && (
-        <ReleasesPopup
-          onClose={() => setShowReleases(false)}
-          onSelectArtist={(id) => setOpenArtist(id)}
-        />
-      )}
       {showDSE && <DSEModal onClose={() => setShowDSE(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
     </div>
