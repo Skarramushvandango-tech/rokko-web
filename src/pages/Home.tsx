@@ -181,18 +181,6 @@ export default function Home() {
         />
       </div>
 
-      {/* BIGSOCIALBAR */}
-      <div className="social-bar-container" data-testid="social-bar">
-        <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
-        <div className="social-bar-links">
-          <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
-          <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
-          <div style={{ flex: 1 }} />
-          <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
-          <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
-        </div>
-      </div>
-
       {/* RELEASES + MERCH + WALLPAPER */}
       <div className="merch-wallpaper-strip">
         <div className="merch-wallpaper-row">
@@ -229,6 +217,18 @@ export default function Home() {
               decoding="async"
             />
           </div>
+        </div>
+      </div>
+
+      {/* BIGSOCIALBAR */}
+      <div className="social-bar-container" data-testid="social-bar">
+        <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
+        <div className="social-bar-links">
+          <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
+          <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
+          <div style={{ flex: 1 }} />
+          <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
+          <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
         </div>
       </div>
 
