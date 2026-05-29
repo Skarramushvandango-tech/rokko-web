@@ -1,0 +1,8 @@
+# Build-Output – NIEMALS committen!
+# GitHub Pages CI baut bei jedem Push neu mit BASE_PATH=/rokko-web/
+dist/
+node_modules/
+*.local
+.DS_Store
+.env
+.env.local
