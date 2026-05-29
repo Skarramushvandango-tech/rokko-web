@@ -1,5 +1,26 @@
 # Rokko! Records — Regeln für Entwickler
 
+---
+
+## ⛔ FÜR KI-AGENTEN (Replit Agent, Claude, GPT, etc.)
+
+**NIEMALS `dist/` direkt bearbeiten, neu bauen oder committen.**
+
+`dist/` steht in `.gitignore` — es wird NICHT in git getrackt.
+GitHub Pages baut bei jedem Push auf `main` automatisch neu (mit `BASE_PATH=/rokko-web/`).
+Ein manueller Build ohne diese Variable erzeugt eine kaputte Seite mit 404-Fehlern.
+
+### Was du als Agent NICHT tun darfst:
+- `npm run build` / `pnpm run build` ausführen und das Ergebnis committen
+- Dateien in `dist/` direkt bearbeiten oder löschen
+- `.gitignore` ändern um `dist/` wieder zu tracken
+
+### Was du stattdessen tust:
+- Nur `src/`, `index.html`, `public/`, `scripts/`, `package.json`, `tsconfig.json` bearbeiten
+- Änderungen committen — GitHub Actions übernimmt Build + Deploy automatisch
+
+---
+
 ## Absolute Verbote (niemals ändern)
 
 1. **::before Pseudo-Elemente**
@@ -18,54 +39,23 @@
    - NUR Spotify, Apple Music, Amazon in den Streaming-Links.
    - KEINE SoundCloud, Beatport, YouTube, TikTok, Facebook Links.
 
-## Deployment (auf den Server laden)
+---
 
-### Was du brauchst
+## Deployment
 
-- `dist.zip` (die Datei, die ich dir gebe)
-- Einen FTP-Client (z.B. FileZilla) oder WinSCP
-- Zugangsdaten zu deinem Netcup-Server
+### GitHub Pages (automatisch)
 
-### Schritt-für-Schritt
+Bei jedem Push auf `main` baut GitHub Actions die Seite neu und deployed sie automatisch.
+URL: https://skarramushvandango-tech.github.io/rokko-web/
 
-1. **dist.zip entpacken** auf deinem Computer
-   - Die ZIP enthält einen Ordner namens `dist/`
-   - Der `dist/` Ordner hat diese Struktur:
-     ```
-     dist/
-     ├── index.html          <- Die Startseite
-     ├── favicon.png         <- Browser-Icon
-     ├── favicon.svg         <- Browser-Icon (SVG)
-     ├── opengraph.jpg       <- Bild für Social Media
-     ├── robots.txt          <- Für Google
-     ├── sitemap.xml         <- Für Google
-     └── assets/
-         ├── index-XXXXXX.js   <- JavaScript (komprimiert)
-         ├── index-XXXXXX.css  <- CSS (komprimiert)
-         ├── videos/
-         │   └── header.mp4  <- Header-Video
-         ├── artist-images/     <- 8 Artist-Bilder
-         ├── banners/           <- 7 Banner-Bilder
-         ├── coverartwork/      <- 8 Cover-Bilder
-         └── wallpaper/         <- 6 Wallpaper-Bilder
-     ```
+### Manuelles FTP-Deployment (Netcup)
 
-2. **Mit dem Server verbinden**
-   - FTP-Client öffnen (FileZilla, WinSCP, oder WebFTP von Netcup)
-   - Server-Adresse, Benutzername, Passwort eingeben
-   - Verbinden
-
-3. **Dateien hochladen**
-   - **ALLE** Dateien und Ordner aus dem `dist/` Ordner hochladen
-   - **Wichtig**: Nicht nur die index.html — alle Unterordner (`assets/videos/`, `assets/artist-images/`, etc.) müssen mit hoch
-   - Ziel: Das Hauptverzeichnis (root) deiner Webseite
-
-4. **Fertig**
-   - Die Seite ist sofort live
-   - Browser-Cache leeren (Strg+Shift+R oder Cmd+Shift+R) und neu laden
+1. Lokal bauen: `npm run build` (der `dist/` Ordner wird lokal erstellt, aber NICHT committed)
+2. `dist/` per FTP (FileZilla, WinSCP) auf den Netcup-Server hochladen
+3. Browser-Cache leeren (Strg+Shift+R)
 
 ### WICHTIG
 
-- **NIE** die `src/` oder `node_modules/` Ordner hochladen — nur der `dist/` Ordner
-- **NIE** die ZIP-Datei selbst auf den Server laden — nur den entpackten Inhalt
-- **NIE** die Dateien aus dem falschen Ordner laden — es muss der `dist/` Ordner sein
+- `dist/` ist in `.gitignore` — NIEMALS in git committen
+- Nur `src/`, Configs und `public/` gehören in git
+- `node_modules/` ebenfalls NICHT in git
