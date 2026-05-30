@@ -39,6 +39,9 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [dropdownTop, setDropdownTop] = useState<number>(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showVideoFullscreen, setShowVideoFullscreen] = useState(false);
+  const videoNewsRef = useRef<HTMLVideoElement>(null);
 
   const selectedArtist: Artist | undefined = openArtist
     ? ARTISTS.find((a) => a.id === openArtist)
@@ -181,42 +184,79 @@ export default function Home() {
         />
       </div>
 
-      {/* RELEASES + MERCH + WALLPAPER */}
-      <div className="merch-wallpaper-strip">
-        <div className="merch-wallpaper-row">
-          <a
-            href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="releases-link-wrap"
-            data-testid="link-releases"
-          >
-            <img
-              src={asset("/assets/banners/releases.png")}
-              alt="Rokko! Releases"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
-          <a
-            href="https://rokko-records-klumpatsch.myspreadshop.de/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="merch-link"
-            data-testid="link-merch"
-          >
-            <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise" loading="lazy" decoding="async" />
-          </a>
-          <div className="wallpaper-link-wrap">
-            <img
-              src={asset("/assets/banners/wallpaperlinks.png")}
-              alt="Wallpaper"
-              onClick={() => setShowWallpaper(true)}
-              data-testid="button-wallpaper"
-              loading="lazy"
-              decoding="async"
-            />
+      {/* SHOP STRIP: DIGITAL + VINYL */}
+      <div className="shop-strip">
+        <a
+          href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shop-strip-item"
+          data-testid="link-digitalshop"
+        >
+          <img src={asset("/assets/banners/digitalshop.png")} alt="Digital Releases" loading="lazy" decoding="async" />
+        </a>
+        <div className="shop-strip-item">
+          <img src={asset("/assets/banners/vinylshop.png")} alt="Vinyl Shop – kommt bald" loading="lazy" decoding="async" />
+        </div>
+      </div>
+
+      {/* NEWS SECTION */}
+      <div className="news-section">
+        <span className="news-section-label">News</span>
+        <div className="news-content-row">
+          <div className="news-video-wrap">
+            <div className="news-frame-b" />
+            <div className="news-frame-f">
+              <video
+                ref={videoNewsRef}
+                src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
+                className="news-video-el"
+                playsInline
+                preload="metadata"
+                onEnded={() => setIsVideoPlaying(false)}
+              />
+              <div className="news-video-ctrl">
+                <button
+                  className="news-ctrl-btn"
+                  aria-label={isVideoPlaying ? "Stop" : "Play"}
+                  onClick={() => {
+                    const v = videoNewsRef.current;
+                    if (!v) return;
+                    if (isVideoPlaying) { v.pause(); v.currentTime = 0; setIsVideoPlaying(false); }
+                    else { v.play().catch(() => {}); setIsVideoPlaying(true); }
+                  }}
+                >{isVideoPlaying ? "⏹" : "▶"}</button>
+                <button className="news-ctrl-btn" aria-label="Vollbild" onClick={() => setShowVideoFullscreen(true)}>⛶</button>
+              </div>
+            </div>
           </div>
+          <div className="news-cover-wrap">
+            <div className="news-date-label">JUNE|13</div>
+            <img src={asset("/assets/coverartwork/sukram-cover.png")} alt="Sukram – I Am War" className="news-cover-img" loading="lazy" decoding="async" />
+            <div className="news-streaming">
+              <a href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP" target="_blank" rel="noopener noreferrer" className="news-stream-link">Spotify</a>
+              <span className="news-stream-sep">|</span>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="news-stream-link">Apple Music</a>
+              <span className="news-stream-sep">|</span>
+              <a href="#" target="_blank" rel="noopener noreferrer" className="news-stream-link">Amazon Music</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MERCH + WALLPAPER */}
+      <div className="merch-wall-strip">
+        <a
+          href="https://rokko-records-klumpatsch.myspreadshop.de/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="merch-wall-item"
+          data-testid="link-merch"
+        >
+          <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise" loading="lazy" decoding="async" />
+        </a>
+        <div className="merch-wall-item" onClick={() => setShowWallpaper(true)} style={{ cursor: "pointer" }} data-testid="button-wallpaper">
+          <img src={asset("/assets/banners/wallpaperlinks.png")} alt="Wallpaper" loading="lazy" decoding="async" />
         </div>
       </div>
 
@@ -232,9 +272,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* HEADSETBUNS */}
-      <div className="headsetbuns-wrap">
-        <img src={asset("/assets/banners/headsetbuns.png")} alt="Rokko! Records" loading="lazy" decoding="async" />
       </div>
 
       {/* FOOTER */}
@@ -313,9 +350,20 @@ export default function Home() {
         </>
       )}
 
+      {showVideoFullscreen && (
+        <div className="video-fs-overlay" onClick={() => setShowVideoFullscreen(false)}>
+          <video
+            src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
+            controls autoPlay playsInline className="video-fs-player"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button className="video-fs-close" onClick={() => setShowVideoFullscreen(false)}>✕</button>
+        </div>
+      )}
       {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
       {showDSE && <DSEModal onClose={() => setShowDSE(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
     </div>
   );
 }
+
