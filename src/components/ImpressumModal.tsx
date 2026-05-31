@@ -18,7 +18,7 @@ export default function ImpressumModal({ onClose }: ImpressumModalProps) {
             ROKKO! Records<br />
             Markus Ilgner<br />
             Am Brunnen 3<br />
-            47179 Duisburg
+            47279 Duisburg
           </p>
 
           <h3>Kontakt</h3>
@@ -30,7 +30,7 @@ export default function ImpressumModal({ onClose }: ImpressumModalProps) {
           <p>
             Markus Ilgner<br />
             Am Brunnen 3<br />
-            47179 Duisburg
+            47279 Duisburg
           </p>
 
           <h3>Haftungsausschluss</h3>
