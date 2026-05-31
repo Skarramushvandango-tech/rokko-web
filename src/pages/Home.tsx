@@ -30,18 +30,29 @@ function IconAmazon() {
   );
 }
 
+function IconYouTube() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.08 0 12 0 12s0 3.92.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/>
+    </svg>
+  );
+}
+
+const YOUTUBE_URL = "https://www.youtube.com/@rokkorecords";
+
 export default function Home() {
   const [openArtist, setOpenArtist] = useState<string | null>(null);
   const [showWallpaper, setShowWallpaper] = useState(false);
   const [showDSE, setShowDSE] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [showVideoPopup, setShowVideoPopup] = useState(false);
+  const [newsPlaying, setNewsPlaying] = useState(false);
+  const [newsMuted, setNewsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const newsVideoRef = useRef<HTMLVideoElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [dropdownTop, setDropdownTop] = useState<number>(0);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [showVideoFullscreen, setShowVideoFullscreen] = useState(false);
-  const videoNewsRef = useRef<HTMLVideoElement>(null);
 
   const selectedArtist: Artist | undefined = openArtist
     ? ARTISTS.find((a) => a.id === openArtist)
@@ -73,6 +84,28 @@ export default function Home() {
     }
   }, [isMuted]);
 
+  const handleNewsPlay = useCallback(() => {
+    const v = newsVideoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play().catch(() => {}); setNewsPlaying(true); }
+    else { v.pause(); setNewsPlaying(false); }
+  }, []);
+
+  const handleNewsStop = useCallback(() => {
+    const v = newsVideoRef.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+    setNewsPlaying(false);
+  }, []);
+
+  const handleNewsMute = useCallback(() => {
+    const v = newsVideoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setNewsMuted(v.muted);
+  }, []);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -81,13 +114,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (openArtist || showWallpaper) {
+    if (openArtist || showWallpaper || showVideoPopup) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [openArtist, showWallpaper]);
+  }, [openArtist, showWallpaper, showVideoPopup]);
 
   return (
     <div className="rokko-page">
@@ -184,91 +217,127 @@ export default function Home() {
         />
       </div>
 
-      {/* SHOP STRIP: DIGITAL + VINYL */}
-      <div className="shop-strip">
+      {/* DIGITAL + VINYL SHOPS */}
+      <div className="shops-row">
         <a
           href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP"
           target="_blank"
           rel="noopener noreferrer"
-          className="shop-strip-item"
+          className="shop-item"
           data-testid="link-digitalshop"
         >
-          <img src={asset("/assets/banners/digitalshop.png")} alt="Digital Releases" loading="lazy" decoding="async" />
+          <img src={asset("/assets/banners/digitalshop.png")} alt="Rokko! Digital Releases" loading="lazy" decoding="async" />
         </a>
-        <div className="shop-strip-item">
-          <img src={asset("/assets/banners/vinylshop.png")} alt="Vinyl Shop – kommt bald" loading="lazy" decoding="async" />
+        <div className="shop-item" data-testid="img-vinylshop">
+          <img src={asset("/assets/banners/vinylshop.png")} alt="Rokko! Vinyl & CD Shop – kommt bald" loading="lazy" decoding="async" />
         </div>
       </div>
 
-      {/* NEWS SECTION */}
-      <div className="news-section">
-        <span className="news-section-label">News</span>
-        <div className="news-content-row">
-          <div className="news-video-wrap">
-            <div className="news-frame-b" />
-            <div className="news-frame-f">
-              <video
-                ref={videoNewsRef}
-                src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
-                className="news-video-el"
-                playsInline
-                preload="metadata"
-                onEnded={() => setIsVideoPlaying(false)}
+      {/* NEWS */}
+      <div className="news-section" data-testid="news-section">
+        <div className="news-stage">
+          <img
+            className="news-header-img"
+            src={asset("/assets/banners/news.png")}
+            alt="Rokko! News"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="news-frame">
+            <div className="news-cover-col">
+              <div className="news-date">JUNE&nbsp;|&nbsp;13</div>
+              <img
+                className="news-cover"
+                src={asset("/assets/coverartwork/war-cover.png")}
+                alt="SUKRAM – I AM WAR"
+                loading="lazy"
+                decoding="async"
               />
-              <div className="news-video-ctrl">
-                <button
-                  className="news-ctrl-btn"
-                  aria-label={isVideoPlaying ? "Stop" : "Play"}
-                  onClick={() => {
-                    const v = videoNewsRef.current;
-                    if (!v) return;
-                    if (isVideoPlaying) { v.pause(); v.currentTime = 0; setIsVideoPlaying(false); }
-                    else { v.play().catch(() => {}); setIsVideoPlaying(true); }
-                  }}
-                >{isVideoPlaying ? "⏹" : "▶"}</button>
-                <button className="news-ctrl-btn" aria-label="Vollbild" onClick={() => setShowVideoFullscreen(true)}>⛶</button>
+              <div className="news-services" aria-hidden="true">
+                <span className="news-service"><IconSpotify /><span>Spotify</span></span>
+                <span className="news-service"><IconApple /><span>Apple&nbsp;Music</span></span>
+                <span className="news-service"><IconAmazon /><span>Amazon&nbsp;Music</span></span>
               </div>
             </div>
-          </div>
-          <div className="news-cover-wrap">
-            <div className="news-date-label">JUNE|13</div>
-            <img src={asset("/assets/coverartwork/sukram-cover.png")} alt="Sukram – I Am War" className="news-cover-img" loading="lazy" decoding="async" />
-            <div className="news-streaming">
-              <a href="https://open.spotify.com/playlist/6GBZNBRcta3DF6MCU5cVAP" target="_blank" rel="noopener noreferrer" className="news-stream-link">Spotify</a>
-              <span className="news-stream-sep">|</span>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="news-stream-link">Apple Music</a>
-              <span className="news-stream-sep">|</span>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="news-stream-link">Amazon Music</a>
+            <div className="news-video">
+              <div
+                className="news-video-wrap"
+                onClick={handleNewsPlay}
+                role="button"
+                tabIndex={0}
+                aria-label={newsPlaying ? "Pause" : "Abspielen"}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleNewsPlay(); } }}
+                data-testid="news-video"
+              >
+                <video
+                  ref={newsVideoRef}
+                  src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
+                  poster={asset("/assets/coverartwork/war-poster.jpg")}
+                  playsInline
+                  muted
+                  preload="metadata"
+                  onPlay={() => setNewsPlaying(true)}
+                  onPause={() => setNewsPlaying(false)}
+                />
+                {!newsPlaying && (
+                  <button className="news-play-btn" onClick={(e) => { e.stopPropagation(); handleNewsPlay(); }} aria-label="Abspielen" data-testid="button-news-play">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                  </button>
+                )}
+                <div className="news-tools" onClick={(e) => e.stopPropagation()}>
+                  <button className="news-tool" onClick={handleNewsMute} aria-label={newsMuted ? "Ton an" : "Ton aus"} data-testid="button-news-mute">
+                    {newsMuted ? (
+                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z" /><path d="M16.5 12l2.7-2.7-1.06-1.06L15.44 10.9l-2.7-2.7-1.06 1.06L14.38 12l-2.7 2.7 1.06 1.06 2.7-2.7 2.7 2.7 1.06-1.06z" /></svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z" /><path d="M16 7.5a5 5 0 010 9v-2a3 3 0 000-5z" /></svg>
+                    )}
+                  </button>
+                  <a className="news-tool" href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" aria-label="YouTube" data-testid="link-news-youtube"><IconYouTube /></a>
+                  <button className="news-tool" onClick={(e) => { e.stopPropagation(); setShowVideoPopup(true); }} aria-label="Vollbild" data-testid="button-news-fullscreen">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z" /></svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* MERCH + WALLPAPER */}
-      <div className="merch-wall-strip">
+      <div className="mw-row">
         <a
           href="https://rokko-records-klumpatsch.myspreadshop.de/"
           target="_blank"
           rel="noopener noreferrer"
-          className="merch-wall-item"
+          className="mw-item mw-merch"
           data-testid="link-merch"
         >
           <img src={asset("/assets/banners/merchbutton.png")} alt="Rokko! Merchandise" loading="lazy" decoding="async" />
         </a>
-        <div className="merch-wall-item" onClick={() => setShowWallpaper(true)} style={{ cursor: "pointer" }} data-testid="button-wallpaper">
+        <div
+          className="mw-item mw-wallpaper"
+          onClick={() => setShowWallpaper(true)}
+          data-testid="button-wallpaper"
+          role="button"
+          tabIndex={0}
+          aria-label="Wallpaper öffnen"
+          onKeyDown={(e) => e.key === "Enter" && setShowWallpaper(true)}
+        >
           <img src={asset("/assets/banners/wallpaperlinks.png")} alt="Wallpaper" loading="lazy" decoding="async" />
         </div>
       </div>
 
       {/* BIGSOCIALBAR */}
       <div className="social-bar-container" data-testid="social-bar">
-        <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
-        <div className="social-bar-links">
-          <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
-          <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
-          <div style={{ flex: 1 }} />
-          <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
-          <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
+        <div className="social-bar-inner">
+          <img src={asset("/assets/banners/bigsocialbar.png")} alt="Rokko! Social Media" loading="lazy" decoding="async" />
+          <div className="social-bar-links">
+            <a href="https://www.instagram.com/rokko_records?igsh=MTdlbWhxbmtxdmVxeA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" data-testid="link-instagram" aria-label="Instagram" />
+            <a href="https://www.facebook.com/share/1Ee1dBz3bM/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" data-testid="link-facebook" aria-label="Facebook" />
+            <div style={{ flex: 1 }} />
+            <a href="https://www.tiktok.com/@rokkorecords" target="_blank" rel="noopener noreferrer" data-testid="link-tiktok" aria-label="TikTok" />
+            <a href="https://on.soundcloud.com/1Q1ox485CwP763IkLs" target="_blank" rel="noopener noreferrer" data-testid="link-soundcloud" aria-label="SoundCloud" />
+          </div>
         </div>
       </div>
 
@@ -348,20 +417,24 @@ export default function Home() {
         </>
       )}
 
-      {showVideoFullscreen && (
-        <div className="video-fs-overlay" onClick={() => setShowVideoFullscreen(false)}>
-          <video
-            src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
-            controls autoPlay playsInline className="video-fs-player"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button className="video-fs-close" onClick={() => setShowVideoFullscreen(false)}>✕</button>
+      {showVideoPopup && (
+        <div className="video-popup-overlay" onClick={() => setShowVideoPopup(false)} data-testid="video-popup">
+          <div className="video-popup" onClick={(e) => e.stopPropagation()}>
+            <button className="video-popup-close" onClick={() => setShowVideoPopup(false)} aria-label="Schließen" data-testid="video-popup-close">✕</button>
+            <video
+              src={asset("/assets/videos/musicvideos/sukram_i_am_war.mp4")}
+              poster={asset("/assets/coverartwork/war-poster.jpg")}
+              controls
+              autoPlay
+              playsInline
+            />
+          </div>
         </div>
       )}
+
       {showWallpaper && <WallpaperPopup onClose={() => setShowWallpaper(false)} />}
       {showDSE && <DSEModal onClose={() => setShowDSE(false)} />}
       {showImpressum && <ImpressumModal onClose={() => setShowImpressum(false)} />}
     </div>
   );
 }
-
