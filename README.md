@@ -48,11 +48,25 @@ Ein manueller Build ohne diese Variable erzeugt eine kaputte Seite mit 404-Fehle
 Bei jedem Push auf `main` baut GitHub Actions die Seite neu und deployed sie automatisch.
 URL: https://skarramushvandango-tech.github.io/rokko-web/
 
-### Manuelles FTP-Deployment (Netcup)
+### FTP-Deployment (Netcup) — SO GEHT ES RICHTIG
 
-1. Lokal bauen: `npm run build` (der `dist/` Ordner wird lokal erstellt, aber NICHT committed)
-2. `dist/` per FTP (FileZilla, WinSCP) auf den Netcup-Server hochladen
-3. Browser-Cache leeren (Strg+Shift+R)
+**Häufigster Fehler (führt zu weißer Seite):** Es wird der **Quellcode** hochgeladen
+statt des **gebauten `dist/`-Ordners**. Wenn auf dem Server eine `index.html` mit
+`<script src="/src/main.tsx">` landet, sieht der Browser nur eine weiße Seite —
+denn `.tsx` kann der Browser nicht laden. Es MÜSSEN die gebauten Dateien hoch.
+
+**Richtiger Weg (empfohlen — kein lokaler Build nötig):**
+1. Auf GitHub unter *Releases* → **"Aktueller Build (Netcup)"** die `dist.zip` herunterladen.
+   (Wird bei jedem Push auf `main` automatisch mit **relativen Pfaden** neu gebaut.)
+2. ZIP entpacken.
+3. **Den INHALT** des entpackten Ordners (`index.html`, `assets/`, `favicon.png` …)
+   per FTP ins Webroot von Netcup laden — NICHT die ZIP selbst, NICHT den `src/`-Ordner.
+4. Browser-Cache leeren (Strg+Shift+R).
+
+**Wichtig — RELATIVE Pfade:** Die Netcup-ZIP wird mit `BASE_PATH=./` gebaut, die
+`index.html` referenziert `./assets/...`. Damit läuft die Seite im Webroot UND in
+jedem Unterordner. Niemals mit `BASE_PATH=/` für Netcup bauen (absolute Pfade brechen
+in Unterordnern).
 
 ### WICHTIG
 

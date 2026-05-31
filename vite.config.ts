@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-const basePath = process.env.BASE_PATH ?? "/";
+// Default ist "./" (RELATIVE Pfade) → ein versehentlicher Build ohne BASE_PATH
+// erzeugt damit eine Netcup-taugliche Seite statt einer kaputten mit absoluten
+// Pfaden. GitHub Pages setzt BASE_PATH=/rokko-web/ explizit in der CI.
+const basePath = process.env.BASE_PATH ?? "./";
 
 export default defineConfig({
   base: basePath,

@@ -31,10 +31,10 @@ jobs:
       - name: Generate wallpaper manifest
         run: node scripts/generate-wallpapers.cjs
 
-      - name: Build for Netcup (BASE_PATH = /)
+      - name: Build for Netcup (BASE_PATH = ./ — RELATIVE PFADE!)
         run: pnpm run build
         env:
-          BASE_PATH: /
+          BASE_PATH: ./
           NODE_ENV: production
 
       - name: Create dist.zip
