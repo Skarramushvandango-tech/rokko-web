@@ -266,7 +266,7 @@ export default function Home() {
                 role="button"
                 tabIndex={0}
                 aria-label={newsPlaying ? "Pause" : "Abspielen"}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleNewsPlay(); } }}
+                onKeyDown={(e) => { if (e.target !== e.currentTarget) return; if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleNewsPlay(); } }}
                 data-testid="news-video"
               >
                 <video
