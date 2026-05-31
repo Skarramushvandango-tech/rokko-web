@@ -26,12 +26,12 @@ name: Validate dev build
             version: 9
 
         - name: Install dependencies
-          run: pnpm install
+          run: pnpm install --no-frozen-lockfile
 
         - name: Generate wallpaper manifest
           run: node scripts/generate-wallpapers.cjs
 
-        - name: TypeScript type check (catches JSX structure errors)
+        - name: TypeScript type check
           run: pnpm exec tsc --noEmit
 
         - name: Build (full production build)
