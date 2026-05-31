@@ -508,11 +508,11 @@
 
   /* GRID VIEW */
   .wallpaper-grid-scroll {
-    overflow-y: auto; flex: 1 1 0; padding: 12px;
+    overflow-y: auto; flex: 0 1 auto; min-height: 0; padding: 12px;
     scrollbar-width: thin; scrollbar-color: #580C03 transparent;
   }
   .wallpaper-popup-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
   }
   .wallpaper-item {
     display: flex; flex-direction: column; align-items: center;
@@ -534,14 +534,14 @@
 
   /* LIGHTBOX VIEW */
   .wallpaper-lightbox {
-    display: flex; flex-direction: column; flex: 1 1 0; overflow: hidden;
+    display: flex; flex-direction: column; flex: 0 1 auto; min-height: 0; overflow: hidden;
   }
   .wallpaper-lightbox-main {
     display: flex; align-items: center; justify-content: center;
-    flex: 1 1 0; gap: 6px; padding: 10px 6px 6px; min-height: 0;
+    flex: 0 0 auto; gap: 6px; padding: 10px 6px 6px; min-height: 0;
   }
   .wallpaper-lightbox-img-wrap {
-    flex: 1 1 0; display: flex; align-items: center; justify-content: center;
+    flex: 0 1 auto; display: flex; align-items: center; justify-content: center;
     min-height: 0; max-height: 100%;
   }
   .wallpaper-lightbox-img-wrap img {
