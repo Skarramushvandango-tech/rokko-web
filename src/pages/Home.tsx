@@ -272,8 +272,6 @@ export default function Home() {
         </div>
       </div>
 
-      </div>
-
       {/* FOOTER */}
       <div className="site-footer">
         <button className="footer-link" onClick={() => setShowDSE(true)}>Datenschutz</button>
