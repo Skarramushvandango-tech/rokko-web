@@ -1,0 +1,42 @@
+name: Validate dev build
+
+  on:
+    push:
+      branches: ["dev"]
+    pull_request:
+      branches: ["dev"]
+
+  jobs:
+    validate:
+      name: TypeScript + Build check
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: "20"
+
+        - name: Install pnpm
+          uses: pnpm/action-setup@v3
+          with:
+            version: 9
+
+        - name: Install dependencies
+          run: pnpm install
+
+        - name: Generate wallpaper manifest
+          run: node scripts/generate-wallpapers.cjs
+
+        - name: TypeScript type check (catches JSX structure errors)
+          run: pnpm exec tsc --noEmit
+
+        - name: Build (full production build)
+          run: pnpm run build
+          env:
+            BASE_PATH: /rokko-web/
+            NODE_ENV: production
+  
